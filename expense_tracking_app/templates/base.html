@@ -1,0 +1,164 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<!-- <html lang="en" > -->
+        <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
+    <script src="{% static 'js/sorttable.js' %}"></script>
+
+    <title>International Card Transaction</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <style>
+        body{
+            font-family: 'Times New Roman', Times, serif;
+            height:100vh;
+            overflow:hidden;
+
+          }
+        .content[]
+        header{
+            z-index:10;
+        }
+
+        table.sortable thead {
+            
+            cursor: pointer;
+        }
+       
+        table.sortable th{
+            background-color: rgb(14, 168, 9) !important;
+            color: #00054b;
+        }
+        .left-menu{
+           background-color: #44494f;
+           color: #f0ab2f;
+           height:100vh;
+        }
+        
+       .left-menu a {
+           display: block;
+           margin-bottom: 2px;
+           font-size: x-large;
+           padding: 6%;
+           text-decoration: none;
+           color: #f0ab2f
+
+       }
+
+       .left-menu a:hover{
+        background-color: rgb(94, 92, 90);
+       }
+       .admin{
+        margin-top: 41vh;
+       }
+      
+    </style>
+</head>
+<body style="font-family: 'Times New Roman', Times, serif; position: relative;"  >
+<header style="position: sticky; top: 0;"  >
+    
+    <nav style=" background-color: #44494f;"  class="navbar mb-1 ">
+        <div  class="container-fluid">
+            <a class="navbar-brand" href="{% url 'dashbord'  %}" title="Back to Dashbord">
+                <img src="{% static '/image/logo.png'%}" alt="Logo" width="30" height="30"
+                    class="d-inline-block align-text-top">
+                BOA  | International card Transaction 
+
+            </a>
+
+            <div class="user_name">
+                   --- {{trnxs|length}}
+                <b>Yosef Emyayu</b>
+            </div>
+        </div>
+    </nav>
+
+
+</header>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- side bar -->
+        <div  class="col-2 left-menu p-0">  
+            <a  href="{% url 'dashbord' %}"  type="button">
+                    
+                <img src="{% static 'image/export.png'%}" alt="Logo" width="30" height="30"
+                class="d-inline-block align-text-top">
+                Dashbord
+            </a>
+            <a href="{% url 'live_view' %}" type="button">
+                    
+                <img src="{% static 'image/export.png'%}" alt="Logo" width="30" height="30"
+                class="d-inline-block align-text-top">
+                Live View
+            </a>
+            <a type="button" href="{% url 'issue_summery' %}">
+                    
+                <img src="{% static 'image/export.png'%}" alt="Logo" width="30" height="30"
+                class="d-inline-block align-text-top">
+                 Issue Summery
+            </a>
+            
+            <a type="button" href="{% url 'report'%}">
+                    
+                <img src="{% static 'image/export.png'%}" alt="Logo" width="30" height="30"
+                class="d-inline-block align-text-top">
+                 Report
+            </a> 
+         
+
+                <a class="admin"   href="/admin/" >
+                    <img src="{% static 'image/admin.png'%}" alt="Logo" width="30" height="30"
+                    class="d-inline-block align-text-top">
+                    Administration
+                </a>
+
+                            
+        </div>
+        <!-- content -->
+        <div class="col-10 p-0 content">
+            {% block content%}
+
+            {% endblock content%}
+            <div class="footers">
+                    <p>Card monitoring tool | Tool for Internal TS Teams |@yosef Emyayu </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}">
+            
+    </script>
+    <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    </script>
+
+
+{% block style%}
+
+{% endblock style%}   
+<style>
+    .footers {
+        background-color: rgb(7, 90, 5);
+        padding: 0;
+        margin: 0;
+        color: #947e55;
+        width: inherit;
+        text-align: center;
+        position: absolute;
+        bottom: 0px;
+}
+</style>
+ </body>
+ </html>
