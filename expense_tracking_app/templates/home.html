@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,6 +13,14 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+
+
+
+
+
     <title>{%block title %} HOME {%endblock title%}</title>
   </head>
   <body>
@@ -45,8 +55,10 @@
                 data-bs-parent="#accordionExample"
               >
                 <div class="accordion-body d-flex flex-column">
-                  <a href="" class="navbar-brand">change Password</a
-                  ><a href="" class="navbar-brand">Logout</a>
+                    <a href="" class="navbar-brand">change Password</a
+                    ><a href="" class="navbar-brand">Logout</a
+                    ><a href="" class="navbar-brand"></a>
+                  </div>
                 </div>
               </div>
             </div>
