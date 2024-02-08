@@ -1,7 +1,19 @@
-.dropdown {
-  background-color: red;
+/* * {
+  overflow-x: hidden !important;
+} */
+body {
+  font-family: serif;
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
 }
 
-body {
-  background-color: blue;
+nav .dropdown-menu {
+  border-radius: 0;
+  width: 40vw;
+}
+.sidebar {
+  height: 100vh;
+  background-color: #1a1f37;
 }

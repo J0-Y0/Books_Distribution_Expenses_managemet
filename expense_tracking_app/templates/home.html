@@ -14,66 +14,91 @@
       crossorigin="anonymous"
     />
 
-  <!-- custom css -->
-  <link rel="stylesheet" href="{% static 'base.css' %}">
-
-
-
-
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'base.css' %}" />
 
     <title>{%block title %} HOME {%endblock title%}</title>
   </head>
   <body>
     <header>
-      <nav class="navbar bg-body-tertiary py-2">
+      <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <b>Rumi Press</b>
-          </a>
-          <div
-            class="navbar-brand accordion position-absolute top-0 end-0"
-            id="accordionExample"
-          >
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button collapsed pb-2"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  <i class="fa-solid fa-user px-2"></i>
+          <div class="navbar-brand">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            Rumi Press
+          </div>
 
-                  {{request.user}}
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body d-flex flex-column">
-                    <a href="" class="navbar-brand">change Password</a
-                    ><a href="" class="navbar-brand">Logout</a
-                    ><a href="" class="navbar-brand"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="navbar-brand dropdown me-3">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              ><i class="fa-solid fa-user pe-1"></i>
+              {{request.user}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Change password</a></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+              <li><a class="dropdown-item" href="#">Theme</a></li>
+            </ul>
           </div>
         </div>
       </nav>
     </header>
-    <aside>
-      <div class="row">
-        <div class="col-4 bg-secondary">kkk</div>
-        <div class="col-8"></div>
-      </div>
-    </aside>
 
-    <main></main>
+    <section class="row">
+      <aside class="col-2 sidebar"></aside>
+      <main class="col-8"></main>
+    </section>
+    <!-- ================================================================================================================================== -->
+    <div
+      class="offcanvas offcanvas-start mt-5"
+      tabindex="-1"
+      id="offcanvasExample"
+      aria-labelledby="offcanvasExampleLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </div>
+        <div class="dropdown mt-3">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <footer></footer>
 
     <!-- bootstrap js  CDN -->
