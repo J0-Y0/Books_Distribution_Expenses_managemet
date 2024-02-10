@@ -28,3 +28,19 @@ Books Distribution Expenses Tracker app build by Django python framework
 
     For security purpose user can not create their account ,they only invited by the the system admin.
     and then when they first time to  login they forward to password change form
+
+# modification log
+
+    -date
+    -user
+    -action
+    -description
+
+# next todo
+
+    1.Optimize CRUD templates context
+    2.back button
+        - delete : auto bach
+        - edit : auto back
+        - add : via cancel / add next
+    3.icon and style for the CRUD

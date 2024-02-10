@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+<hr />
+{% block title%} | {{title}} {% endblock title%}
+<hr />
+{% block mainContent%}
+
+
+<div class="card m-2 mt-3 ">
+  <div class="card-header">{{title}}</div>
+  <div class="card-body py-0 px-3">
+    <p class="card-text">
+        <div class="row">
+            <form method="POST" class="col-12 col-md-10 col-lg-6">
+                {% csrf_token %} {%for field in form %}
+                <span class="d-flex justify-content-between">
+                    {{field.label}} 
+                
+                    <span class="text-danger">
+                        
+                        {% for error in field.errors %}
+                        {% if forloop.first %}
+                        <!-- Code to execute only during the first iteration -->
+                        <i class="fa-solid fa-triangle-exclamation pe-2"></i>
+                        {% endif %}
+                        
+                        
+                        {{ error }} 
+                        {% endfor %}
+                    </span>
+                </span>
+                
+               
+                {{field}}  {%endfor%}
+            
+                <input class="btn m-0 btn-outline-primary border-1 rounded-0" type="submit" value="Save" />
+              </form> 
+              <div class="col-md-2 col-lg-6 display-6">{{message}}  {{form.errors}}</div>
+        </div>
+
+          
+         </p>
+
+         
+  </div>
+</div>
+
+
+{% endblock mainContent%}

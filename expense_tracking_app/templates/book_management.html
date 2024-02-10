@@ -3,6 +3,7 @@
 {% block title%} | Books {% endblock title%}
 <hr />
 {% block mainContent%}
+
 <table class="table table-striped table-responsive">
   <thead>
     <tr>
@@ -15,7 +16,12 @@
       <th>Published_date</th>
       <th title="distribution expense ">Expense</th>
       <th>Category</th>
-      <th><i class="fa-solid fa-file-circle-plus px-2"></i>Add Book</th>
+
+      <th>
+        <a href="{%url 'add_book'%}">
+          <i class="fa-solid fa-file-circle-plus px-2"></i>Add Book
+        </a>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -31,11 +37,55 @@
       <td>{{book.distribution_expense}}</td>
       <td>{{book.category.type_name}}</td>
       <td>
-        <i class="fa-solid fa-pencil px-3"></i>
-        <i class="fa-solid fa-trash px-3"></i>
+        <a href="{%url 'editBook' book.id %}">
+          <i class="fa-solid fa-pencil px-3"></i>
+        </a>
+
+        <a href="{%url 'deleteBook' book.id %}">
+          <i class="fa-solid fa-trash px-3"></i>
+        </a>
       </td>
     </tr>
     {%endfor%}
   </tbody>
 </table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="addModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-bg-secondary">
+        <h1 class="modal-title fs-5" id="addModalLabel">Add Book</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %} {%for field in form %}{{field.label}}{{field.errors}}
+          {{field}} {%endfor%}
+
+          <input type="submit" value="Save" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock mainContent%}

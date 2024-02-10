@@ -22,9 +22,12 @@ nav .dropdown-menu {
   color: #dedede;
   max-width: 200px;
 }
-.sidemenu a {
+a {
   text-decoration: unset;
   color: inherit;
+}
+
+.sidemenu a {
   padding-bottom: 20px;
   margin-bottom: 25px;
   border-bottom: #6a6a6d solid 1px;
@@ -32,6 +35,12 @@ nav .dropdown-menu {
   display: block;
   /* width: 100%; */
 }
-a:hover {
+
+.sidemenu a:hover {
   border-bottom: #000dff solid 1px;
+}
+
+.mainContent {
+  height: 100vh;
+  overflow-y: scroll;
 }
