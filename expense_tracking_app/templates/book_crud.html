@@ -5,9 +5,19 @@
 <hr />
 {% block mainContent%}
 
+<!-- Button trigger modal -->
+
 
 <div class="card m-2 mt-3 ">
-  <div class="card-header"> <b>{{header}} </b></div>
+  <div class="card-header d-flex justify-content-between"> <b>{{header}} </b>    
+
+    
+    {%if title == 'Add Book'%}
+    <b><a href="{%url 'add_book'%}" class="btn  btn-outline-primary rounded-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+      <i class="fa-solid fa-file-arrow-up px-2"></i>Import
+    </a></b>
+    {%endif%}
+  </div>
   <div class="card-body py-0 px-"> 
     <p class="card-text">
         <div class="row ">
@@ -66,5 +76,28 @@
   </div>
 </div>
 
+
+
+<!-- import Modal  -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Import from local Excel sheet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form action="" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
+                  <div class="modal-body"> 
+                      <input type="file" class="form-control" required accept=".xls,.xlsx" name="excel_file">
+                  </div>
+                  <div div class="modal-footer">
+                      <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
+                      <input type="submit" class="btn btn-primary  rounded-0" value="Save">
+                  </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock mainContent%}

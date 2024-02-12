@@ -7,9 +7,9 @@ class Book_type(models.Model):
         return self.type_name
 
 class Books(models.Model):
-    idNumber =models.IntegerField(unique=True) 
+    idNumber =models.CharField(max_length = 600) 
     title = models.CharField(max_length =500 ,null = False)
-    subtitle = models.CharField(max_length =500 ,null = False)
+    subtitle = models.CharField(max_length =500 ,null = True ,default ="")
     author = models.CharField(max_length =100 ,null = False)
     publisher = models.CharField(max_length =500 ,null = False)
     published_date = models.DateField( max_length =1000 ,null = False)

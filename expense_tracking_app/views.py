@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
 from .models import *
 from .form import *
+from datetime import datetime
+from openpyxl import load_workbook
+
 
 def home(request):
     return render(request,"home.html")
@@ -18,6 +21,7 @@ def book_management(request):
 def add_book(request):
     form = Books_form()
     message = ""
+    # add individually 
     if request.method == 'POST':
         form = Books_form(request.POST)
 
@@ -31,6 +35,32 @@ def add_book(request):
             form = Books_form(request.POST)
             message = "unable to save please try again !"
 
+
+
+    # import from excel sheet
+    if request.method == 'POST' and 'excel_file' in request.FILES:
+        excel_file = request.FILES['excel_file']
+        wb = load_workbook(excel_file)
+        ws = wb.active
+
+        try:
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense = row
+                category_typ = Book_type.objects.filter(type_name__exact = category.strip()).first()
+                if category_typ == None:
+                    modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Imported"
+                    Book_type.objects.create(type_name = category.strip(),modification_log = modification_log)
+                modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Imported"
+                Books.objects.create( idNumber =id,title =title	, subtitle =subtitle	,author =authors	, publisher =publisher,	published_date =published_date,	category=category_typ,	 distribution_expense =distribution_expense ,modification_log = modification_log)
+            
+            context = {"header":"Successfully Imported",
+                        "message":"Imported Books:"}
+            return render(request, 'success.html',context)
+        except Exception as  e:
+                context = {"header":"Unable to Import !!!",
+                           "message":e}
+                return render(request, 'success.html',context)
+      
     context = {
         "title":"Add Book",
         "header":"Add Book | Adding a Record ",
