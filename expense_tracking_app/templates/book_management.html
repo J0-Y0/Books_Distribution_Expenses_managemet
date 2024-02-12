@@ -19,7 +19,12 @@
 
       <th>
         <a href="{%url 'add_book'%}">
-          <i class="fa-solid fa-file-circle-plus px-2"></i>Add Book
+          <i class="fa-solid fa-file-circle-plus px-1"></i>Add
+        </a>
+      </th>
+      <th>
+        <a href="{%url 'add_book'%}">
+          <i class="fa-solid fa-file-arrow-up px-2"></i>Import
         </a>
       </th>
     </tr>
@@ -36,7 +41,7 @@
       <td>{{book.published_date}}</td>
       <td>{{book.distribution_expense}}</td>
       <td>{{book.category.type_name}}</td>
-      <td>
+      <td colspan="2">
         <a href="{%url 'editBook' book.id %}">
           <i class="fa-solid fa-pencil px-3"></i>
         </a>

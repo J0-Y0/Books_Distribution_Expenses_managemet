@@ -33,13 +33,14 @@ def add_book(request):
 
     context = {
         "title":"Add Book",
+        "header":"Add Book | Adding a Record ",
+        "description":"Add a book, fill out all the required field, and save. You can add multiple records as you wish, and you have the option to import records from an Excel sheet by clicking the import button.",
+        "submitBtn":"Save,Add Another",
         "form":form,
         "message":message
       
     }
     return render(request,'book_crud.html',context)
-
-
 def editBook(request,id):
     book = Books.objects.get(pk = id)
     message = ""
@@ -51,20 +52,22 @@ def editBook(request,id):
             book.modification_log ="negem ==="+ book.modification_log
             book.save()
             message = "Done,Record saved "
-            form = Books_form()
-            message = "Done,Record saved "
+                    
+            return redirect('books')  # Redirect to a success URL
+
         else:
             form = Books_form(instance=book)
             message = "unable to save please try again !"
-
     context = {
-        "title":"edit Book",
+        "title":"Update Records",
+        "header":"Update Records | Editing Books Data ",
+        "description":"Edit book data effortlessly: simply modify the field data, save your changes, and watch as they're promptly updated in the database",
+        "submitBtn":"Update",
         "form":form,
         "message":message
       
     }
     return render(request,'book_crud.html',context)
-
 def deleteBook(request,id):
     book = Books.objects.get(pk = id)
     print(book.id)
@@ -84,7 +87,10 @@ def deleteBook(request,id):
             message = "unable to save please try again !"
 
     context = {
-        "title":"Add Book",
+        "title":"Delete Records",
+        "header":"Delete | Erasing Books Data ",
+        "description":"Erasing Books Data,Are you sure you want to delete this book? Deleting it is permanent, with no option for recovery once it's lost. If you're uncertain, please cancel the action",
+        "submitBtn":"Delete ",
         "form":form,
         "message":message
       
