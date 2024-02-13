@@ -56,42 +56,51 @@
   </tbody>
 </table>
 
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="addModal"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="addModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-bg-secondary">
-        <h1 class="modal-title fs-5" id="addModalLabel">Add Book</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form method="POST">
-          {% csrf_token %} {%for field in form %}{{field.label}}{{field.errors}}
-          {{field}} {%endfor%}
+<nav aria-label="Page  navigation  position-sticky top-0">
+  <ul class="pagination justify-content-end">
+    {% if books.has_previous %}
+    <li class="page-item">
+      <a href="?page={{  books.previous_page_number }}" class="page-link"
+        >Previous</a
+      >
+    </li>
 
-          <input type="submit" value="Save" />
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
-</div>
+    {% endif %} {% for i in books.paginator.page_range %}
+    <!--  -->
+    {% if books.number == i%}
+    <li class="page-item acvive">
+      <a class="page-link active" href="#">{{i}}</a>
+    </li>
+    {%elif books.number == i|add:"1" %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ i }}">{{i}}</a>
+    </li>
+    {%elif books.number == i|add:"2" %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ i }}">{{i}}</a>
+    </li>
+
+    {%elif books.number == i|add:"-1" %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ i }}">{{i}}</a>
+    </li>
+
+    {%elif books.number == i|add:"-2" %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ i }}">{{i}}</a>
+    </li>
+
+    {% endif %} {% endfor %}
+    <li class="page-item">
+      <a href="?page={{  books.last_page_number }}" class="page-link"
+        >{{ books.last_page_number }}</a
+      >
+    </li>
+
+    <li class="page-item {% if not books.has_next %} disabled {% endif %}">
+      <a href="?page={{ books.next_page_number }}" class="page-link">Next</a>
+    </li>
+  </ul>
+</nav>
+
 {% endblock mainContent%}

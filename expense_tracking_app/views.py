@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
 from .form import *
 from datetime import datetime
@@ -8,14 +9,19 @@ from openpyxl import load_workbook
 def home(request):
     return render(request,"home.html")
 def book_management(request):
-    form = Books_form()
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save() 
-            form = Books_form()
-        else:
-            form = Books_form(request.POST)
-    books = Books.objects.all()
+    
+    books_list = Books.objects.all()
+    paginator = Paginator(books_list,4)
+    page_num = request.GET.get('page',1)
+    try:
+        books = paginator.page(page_num)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        books = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        books = paginator.page(paginator.num_pages)
+
     
     return render(request,'book_management.html',{"books":books})
 def add_book(request):
