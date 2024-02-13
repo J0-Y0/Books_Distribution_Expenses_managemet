@@ -43,4 +43,10 @@ a {
 .mainContent {
   height: 100vh;
   overflow-y: scroll;
+  position: relative;
+}
+
+.mainContent_mainView{
+height: 84vh;
+overflow-Y: scroll;
 }

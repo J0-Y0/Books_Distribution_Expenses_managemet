@@ -11,7 +11,7 @@ def home(request):
 def book_management(request):
     
     books_list = Books.objects.all()
-    paginator = Paginator(books_list,4)
+    paginator = Paginator(books_list,15)
     page_num = request.GET.get('page',1)
     try:
         books = paginator.page(page_num)
