@@ -64,8 +64,22 @@
         >Previous</a
       >
     </li>
-
-    {% endif %} {% for i in books.paginator.page_range %}
+    <!-- first page -->
+    <li class="page-item">
+      <a href="?page=1 " class="page-link"
+        >1</a
+      >
+    </li>
+    <!-- page list separeter -->
+    <li class="page-item">
+      <a href="#" class="page-link disabled"
+        >...</a>
+      
+    </li>
+    
+    {% endif %} 
+   
+    {% for i in books.paginator.page_range %}
     <!--  -->
     {% if books.number == i%}
     <li class="page-item acvive">
@@ -91,15 +105,28 @@
     </li>
 
     {% endif %} {% endfor %}
-    <li class="page-item">
-      <a href="?page={{  books.last_page_number }}" class="page-link"
-        >{{ books.last_page_number }}</a
-      >
-    </li>
+   
 
-    <li class="page-item {% if not books.has_next %} disabled {% endif %}">
+
+
+    {% if  books.has_next %} 
+    <!-- page list separeter  -->
+    <li class="page-item">
+      <a href="#" class="page-link disabled"
+        >...</a>
+      
+    </li>
+    <!--  last page  -->
+    <li class="page-item">
+      <a href="?page={{  books.paginator.num_pages }}" class="page-link"
+        >{{ books.paginator.num_pages }}</a>
+      
+    </li>
+    <li class="page-item ">
       <a href="?page={{ books.next_page_number }}" class="page-link">Next</a>
     </li>
+    {% endif %}
+    
   </ul>
 </nav>
 

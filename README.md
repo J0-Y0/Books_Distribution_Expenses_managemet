@@ -40,7 +40,9 @@ Books Distribution Expenses Tracker app build by Django python framework
 
     1.Optimize CRUD templates context
     2.back button
-        - delete : auto bach
-        - edit : auto back
-        - add : via cancel / add next
+        - delete : auto bach----doen
+        - edit : auto back---done
+    3.add : via cancel / add next
+    4.pagination
+        <1 ..40 41 42 ...100>
     3.icon and style for the CRUD
