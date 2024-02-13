@@ -91,20 +91,13 @@
     <li class="page-item">
       <a class="page-link" href="?page={{ i }}">{{i}}</a>
     </li>
-    {%elif books.number == i|add:"2" %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ i }}">{{i}}</a>
-    </li>
+   
 
     {%elif books.number == i|add:"-1" %}
     <li class="page-item">
       <a class="page-link" href="?page={{ i }}">{{i}}</a>
     </li>
 
-    {%elif books.number == i|add:"-2" %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ i }}">{{i}}</a>
-    </li>
 
     {% endif %} {% endfor %}
    
