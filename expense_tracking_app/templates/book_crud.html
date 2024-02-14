@@ -1,0 +1,103 @@
+{%extends 'base.html'%}
+{% load static%}
+<hr />
+{% block title%} | {{title}} {% endblock title%}
+<hr />
+{% block mainContent%}
+
+<!-- Button trigger modal -->
+
+
+<div class="card m-2 mt-3 ">
+  <div class="card-header d-flex justify-content-between"> <b>{{header}} </b>    
+
+    
+    {%if title == 'Add Book'%}
+    <b><a href="{%url 'add_book'%}" class="btn  btn-outline-primary rounded-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+      <i class="fa-solid fa-file-arrow-up px-2"></i>Import
+    </a></b>
+    {%endif%}
+  </div>
+  <div class="card-body py-0 px-"> 
+    <p class="card-text">
+        <div class="row ">
+          <div class=" d-none d-md-inline-flex  col-md-6 pt-4  justify-content-center ">
+            <div class="row ">
+              <div class="col-12 d-flex justify-content-center pb-0 mb-0">
+                <img   src="{% static 'addBook.png'%}"  alt="Logo" width="300" height="300">
+              </div>
+              <div class="col-12 text-center px-5 ">
+                <h3>{{header}}</h3>
+                <hr>
+                {{description}}
+
+
+              </div>
+            </div>
+    
+
+    
+            </div>
+
+              <div class=" border ps-5  border-2  border-top-0 border-bottom-0 border-end-0  col-12 col-md-6 col-lg-6">
+                <form method="POST" >
+                  {% csrf_token %} {%for field in form %}
+                  <span class="d-flex justify-content-between">
+                    <p class="text-secondary p-0 m-0">
+                      {{field.label}} 
+                    </p>                      
+                  
+                      <span class="text-danger">
+                          
+                          {% for error in field.errors %}
+                          {% if forloop.first %}
+                          <!-- Code to execute only during the first iteration -->
+                          <i class="fa-solid fa-triangle-exclamation pe-2"></i>
+                          {% endif %}
+                          
+                          
+                          {{ error }} 
+                          {% endfor %}
+                      </span>
+                  </span>
+                  
+                
+                  {{field}}  {%endfor%}
+              
+                  <input class="btn m-0 btn-outline-primary border-1 rounded-0" type="submit" value="{{submitBtn}}" />
+                </form> 
+              </div>
+              
+              
+          </div>
+         </p>
+
+         
+  </div>
+</div>
+
+
+
+<!-- import Modal  -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Import from local Excel sheet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form action="" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
+                  <div class="modal-body"> 
+                      <input type="file" class="form-control" required accept=".xls,.xlsx" name="excel_file">
+                  </div>
+                  <div div class="modal-footer">
+                      <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
+                      <input type="submit" class="btn btn-primary  rounded-0" value="Save">
+                  </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock mainContent%}

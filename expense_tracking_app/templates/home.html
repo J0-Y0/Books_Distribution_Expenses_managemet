@@ -1,7 +1,84 @@
-{%extends 'base.html'%}
+{%extends 'base.html'%} {%load static%}
+
 <hr />
 {% block title%} | Dashboard {% endblock title%}
 <hr />
 {% block mainContent%}
-<h1>yosef</h1>
+
+<div id="chartContainer" style="width: 100%; height: 360px "></div>
+<div >
+
+  <div class="card bg-success-subtle position-sticky bottom-0">
+    <div class="card-header"><b>Expense</b></div>
+    <div class="card-body ">
+      
+         <div class="row">
+         <div class="col-3 ">
+          <div class="alert  alert-success mb-1" role="alert">
+            Summarized Analysis  <hr> <ul> 
+             
+              <li>Books :{{total.books}}</li>
+              <li>Books category: {{total.category}}</li>
+              <li>Total Expense: {{total.expense|floatformat:2}}</li>
+              <li>Average Expense {{total.average|floatformat:2}}</li>
+            </ul>
+         
+          </div>
+          
+        
+         </div>
+
+          <div class="col-9 d-flex " >
+           
+            {%for category in catagories%} 
+
+            <div class=" card bg-success m-2 text-secondary text-light" style="width: 18rem;">
+              <div class="card-body">
+                <h5  class="card-title">{{category.name|title}}</h5>
+                  <hr>
+              
+           <ul>   <li>Books: {{category.books}}</li>
+            <li>Expense: {{category.expense|floatformat:2}}</li>
+            <li>Average Expense: {{category.average|floatformat:2}}</li></ul>
+    
+            </div>
+          </div>
+    
+    
+    
+        {%endfor%}
+
+          </div>
+
+         </div>
+          
+</div>
+
+
+
+
+    </div>
+  </div>
+
+  <script src="{% static 'canvasjs.min.js' %}"></script>
+
+  <script>
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2",
+            animationEnabled: true,
+            title:{
+                text: "Distribution Expense"
+            },
+            data: [{
+                type: "pie",
+                startAngle: -90,
+                yValueFormatString: "#,###'%'",
+                dataPoints: {{ datapoints | safe }}
+            }]
+        });
+        chart.render();
+    }
+  </script>
 {% endblock mainContent%}
+</div>
