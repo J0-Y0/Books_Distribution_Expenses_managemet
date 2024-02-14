@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+from django.db.models import Sum,Avg
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
 from .form import *
@@ -7,23 +9,49 @@ from openpyxl import load_workbook
 
 
 def home(request):
-    return render(request,"home.html")
+    types = Book_type.objects.all()
+
+    catagories = []
+    datapoints = []
+    for type in types:
+        
+        books = Books.objects.filter(category = type)
+        expense = books.aggregate(Sum("distribution_expense"))["distribution_expense__sum"]
+        print(expense)
+        average_expense = books.aggregate(average_expense = Avg("distribution_expense"))['average_expense']
+        
+        category = {"name":type,"books":len(books),"expense":expense,"average" : average_expense}
+        catagories.append(category)
+        data = {"label":type.type_name,"y":round(expense)}
+        datapoints.append(data)
+        
+    all_books = Books.objects.all()
+    total = {"books":len(all_books),"category":len(catagories),"expense":all_books.aggregate(sum = Sum('distribution_expense'))['sum'],"average":all_books.aggregate(avg = Avg('distribution_expense'))['avg']}
+        
+    context ={"datapoints":datapoints,"catagories":catagories,"total":total}
+    
+    return render(request,"home.html", context)
 def book_management(request):
     
-    books_list = Books.objects.all()
-    paginator = Paginator(books_list,15)
+    books_list = Books.objects.all()  
+    book_per_page = 15
+    paginator = Paginator(books_list,book_per_page)
     page_num = request.GET.get('page',1)
     try:
         books = paginator.page(page_num)
+        page_offset = (int(page_num)-1)*book_per_page 
     except PageNotAnInteger:
         # if page is not an integer, deliver the first page
         books = paginator.page(1)
+        page_offset = 0
+        
     except EmptyPage:
         # if the page is out of range, deliver the last page
         books = paginator.page(paginator.num_pages)
+        page_offset = ((paginator.num_pages)-1)*book_per_page
 
     
-    return render(request,'book_management.html',{"books":books})
+    return render(request,'book_management.html',{"books":books,"page_offset":page_offset})
 def add_book(request):
     form = Books_form()
     message = ""
