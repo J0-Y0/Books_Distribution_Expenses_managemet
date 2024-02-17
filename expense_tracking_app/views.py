@@ -36,7 +36,7 @@ def home(request):
 def book_management(request):
     
     books_list = Books.objects.all()  
-    bookFilter = BookFilter(request, queryset=books_list)
+    bookFilter = BookFilter(request.GET, queryset=books_list)
     books_list = bookFilter.qs
     book_per_page = 15
     paginator = Paginator(books_list,book_per_page)
