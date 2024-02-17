@@ -57,12 +57,16 @@ thead th {
   display: none !important;
 }
 
-tr:hover td{
+tr:hover td {
   background-color: #d4d4fa !important;
 }
 /* limit bulk row data view */
-td{
+td {
   max-width: 10vw;
   text-wrap: nowrap;
   overflow-x: hidden;
+}
+.modal-table td {
+  max-width: fit-content;
+  text-wrap: wrap;
 }
