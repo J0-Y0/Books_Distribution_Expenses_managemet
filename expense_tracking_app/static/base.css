@@ -56,3 +56,13 @@ thead th {
 .canvasjs-chart-credit {
   display: none !important;
 }
+
+tr:hover td{
+  background-color: #d4d4fa !important;
+}
+/* limit bulk row data view */
+td{
+  max-width: 10vw;
+  text-wrap: nowrap;
+  overflow-x: hidden;
+}

@@ -5,8 +5,13 @@
 <hr />
 {% block mainContent%}
 
-<!-- Button trigger modal -->
 
+<nav style="--bs-breadcrumb-divider: ' |';" aria-label="breadcrumb">
+  <ol class="breadcrumb p-2 bg-primary-subtle "> 
+    <li class="breadcrumb-item text-primary"><a href="{%url 'books' %}">Book Management  </a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{title}}</li>
+  </ol>
+</nav>
 
 <div class="card m-2 mt-3 ">
   <div class="card-header d-flex justify-content-between"> <b>{{header}} </b>    
@@ -65,6 +70,7 @@
                   {{field}}  {%endfor%}
               
                   <input class="btn m-0 btn-outline-primary border-1 rounded-0" type="submit" value="{{submitBtn}}" />
+                  <a class="btn btn-outline-secondary rounded-0 " href="{% url 'books'%}">cancel</a>
                 </form> 
               </div>
               

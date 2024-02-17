@@ -28,7 +28,7 @@
 
         <th title="distribution expense ">Expense</th>
 
-        <th colspan="4">
+        <th colspan="5">
           <a
             class="btn btn-outline-primary rounded-0 p-1"
             href="{%url 'add_book'%}"
@@ -50,12 +50,26 @@
         <td>{{book.published_date}}</td>
         <td>{{book.category.type_name}}</td>
         <td>{{book.distribution_expense}}</td>
+        {{book}}
 
+
+
+
+        
+
+        <td colspan="2">
+          <button onclick="dynamicModal('{{book}}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-solid fa-circle-info"></i>    
+                </button>
+        
+        </td>
+        
         <td colspan="2">
           <a href="{%url 'editBook' book.id %}">
             <i class="fa-solid fa-pencil px-3"></i>
           </a>
         </td>
+        
         <td>
           <a href="{%url 'deleteBook' book.id %}">
             <i class="fa-solid fa-trash px-3"></i>
@@ -66,6 +80,29 @@
     </tbody>
   </table>
 </div>
+
+<!--Detail view modal-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="madal_body" class="modal-body">
+        ...jkjjjkkj
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- paginator  -->
 <nav aria-label="Page  navigation  ">
@@ -124,9 +161,19 @@
         class="page-link"
         >Next</a
       >
+
+
+     
     </li>
     {% endif %}
   </ul>
 </nav>
+<script>
+  dynamicModal = (book)=>{
+
+   const modalbody =  document.getElementById("madal_body")
+   modalbody.innerHTML = book.id
+  }
+</script>
 
 {% endblock mainContent%}
