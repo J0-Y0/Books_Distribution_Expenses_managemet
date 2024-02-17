@@ -1,11 +1,13 @@
-from django.shortcuts import redirect, render
-from django.db.models import Sum,Avg
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import redirect, render
+from openpyxl import load_workbook
+from django.db.models import Sum,Avg
+from datetime import datetime
+
+
 from .models import *
 from .form import *
-from datetime import datetime
-from openpyxl import load_workbook
+from .filter import BookFilter
 
 
 def home(request):
@@ -34,6 +36,8 @@ def home(request):
 def book_management(request):
     
     books_list = Books.objects.all()  
+    bookFilter = BookFilter(request.GET, queryset=books_list)
+    books_list = bookFilter.qs
     book_per_page = 15
     paginator = Paginator(books_list,book_per_page)
     page_num = request.GET.get('page',1)
@@ -51,7 +55,7 @@ def book_management(request):
         page_offset = ((paginator.num_pages)-1)*book_per_page
 
     
-    return render(request,'book_management.html',{"books":books,"page_offset":page_offset})
+    return render(request,'book_management.html',{"books":books,"bookFilter":bookFilter,"page_offset":page_offset})
 def add_book(request):
     form = Books_form()
     message = ""
