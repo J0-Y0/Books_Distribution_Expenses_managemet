@@ -4,9 +4,11 @@
 <hr />
 {% block mainContent%}
 
-<form method="get">
-  {{ bookFilter.form.as_p }}
-  <input type="submit" value="Filter" />
+<form method="get" class="d-flex p-1 bg-primary-subtle">
+  {% for field in bookFilter.form%} {{field}} {%endfor%}
+  <button class="btn btn-outline-primary rounded-0" type="submit">
+    <i class="fa-solid fa-filter"></i>
+  </button>
 </form>
 {% for obj in filter.qs %} {{ obj.name }} - ${{ obj.price }}<br />
 {% endfor %}
