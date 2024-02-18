@@ -19,7 +19,6 @@ def home(request):
         
         books = Books.objects.filter(category = type)
         expense = books.aggregate(Sum("distribution_expense"))["distribution_expense__sum"]
-        print(expense)
         average_expense = books.aggregate(average_expense = Avg("distribution_expense"))['average_expense']
         
         category = {"name":type,"books":len(books),"expense":expense,"average" : average_expense}
@@ -138,7 +137,6 @@ def editBook(request,id):
     return render(request,'book_crud.html',context)
 def deleteBook(request,id):
     book = Books.objects.get(pk = id)
-    print(book.id)
     form = Books_form(instance=book)
     message = ""
     if request.method == 'POST':
