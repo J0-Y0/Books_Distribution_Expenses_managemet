@@ -7,8 +7,10 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('books', views.book_management, name='books'),
     path('add_book', views.add_book, name='add_book'),
-
     path('editBook/<int:id>/', views.editBook, name='editBook'),
     path('deleteBook/<int:id>/', views.deleteBook, name='deleteBook'),
+
+    path('users', views.user_managment, name = 'users' ),
+    path('add_user', views.add_user, name='add_user'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

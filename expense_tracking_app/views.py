@@ -32,6 +32,7 @@ def home(request):
     context ={"datapoints":datapoints,"catagories":catagories,"total":total}
     
     return render(request,"home.html", context)
+# book
 def book_management(request):
     
     books_list = Books.objects.all()  
@@ -162,3 +163,14 @@ def deleteBook(request,id):
       
     }
     return render(request,'book_crud.html',context)
+
+
+# user
+def user_managment(request):
+    data = Profile.objects.all()
+
+    return render(request,'user_managment.html',{'data':data })
+
+def add_user(request):
+    user_form = User_form(request.POST)
+    return render(request,'user_crud.html',{'user_form':user_form })

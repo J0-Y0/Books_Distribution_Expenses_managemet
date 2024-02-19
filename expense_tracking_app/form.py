@@ -2,6 +2,8 @@
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
 
 class Books_form(forms.ModelForm):
     class Meta:
@@ -18,15 +20,18 @@ class Books_form(forms.ModelForm):
                     "category":forms.Select(attrs={"class": "form-select mb-1" }),
                 }
                 
-class User_form(forms.ModelForm):
-    username = forms.CharField(  widget=forms.TextInput(attrs={'requred' 'class': 'form-control'})),
-    email = forms.EmailField(required = True ,widget=forms.EmailInput(attrs={'class': 'form-control'}) ),
-    password1 = forms.CharField(required = True ,widget=forms.PasswordInput(attrs={'class': 'form-control'}) ),
-    password2 = forms.CharField(required = True ,widget=forms.PasswordInput(attrs={'class': 'form-control'}) ),
-    # custom validation 
+class User_form(UserCreationForm):
     class Meta:
-        Model = User
+        model = User
         fields = ['username','email','password1','password2']
+        widgets = {
+            'username' :forms.CharInput( attrs={'class': 'form-control'}),
+            'email':   forms.EmailInput(attrs={"class": "form-control"}) ,
+            'password1' :forms.PasswordInput(attrs={'class': 'form-control'}), 
+            'password2' : forms.PasswordInput(attrs={'class': 'form-control'}), 
+        }
+
+        # custom validation 
         def clean_password2(self):
             password1 = self.cleaned_data.get('password1')
             password2 = self.cleaned_data.get('password2')
@@ -34,9 +39,9 @@ class User_form(forms.ModelForm):
                 raise forms.ValidationError("Passwords do not match")
             return password2
 
-class Profile_form():
+class Profile_form(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     phone = forms.CharField(widget=forms.TextInput (attrs={'type':'tel','class': 'form-control'})),
     class Meta:
-        Model = User
+        model = Profile
         fields = ['phone','avatar']
