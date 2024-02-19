@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -9,6 +11,4 @@ urlpatterns = [
     path('editBook/<int:id>/', views.editBook, name='editBook'),
     path('deleteBook/<int:id>/', views.deleteBook, name='deleteBook'),
 
-    
-
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

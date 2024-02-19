@@ -1,5 +1,6 @@
 from django.db import models
-    
+from django.contrib.auth.models import User
+
 class Book_type(models.Model):
     type_name =models.CharField(max_length = 500 ,unique =True)
     modification_log = models.CharField(max_length = 2000)
@@ -18,9 +19,15 @@ class Books(models.Model):
     modification_log = models.CharField(max_length = 2000)
     
     category = models.ForeignKey( Book_type,on_delete = models.PROTECT) 
- 
-    # modification log 
-    # append:
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone  = models.CharField(max_length = 20)
+    avatar = models.ImageField(default='default.jpg', upload_to='User_images')     
+
+
+
+# modification log 
+# append:
     #    {date_time | edit/create | userName}
 
 # class userProfile(models.Model):
