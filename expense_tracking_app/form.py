@@ -27,6 +27,7 @@ class User_form(forms.ModelForm):
 
     # custom validation 
     class Meta:
+        Model = User
         fields = ['username','email','password1','password2']
         def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -34,3 +35,10 @@ class User_form(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords do not match")
         return password2
+
+Class Profile_form()
+    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    phone = forms.Charfield(requred = False,  widget=forms.TextInput(attrs={'class': 'form-control'})),
+    class Meta:
+        Model = User
+        fields = ['phone','avatar']
