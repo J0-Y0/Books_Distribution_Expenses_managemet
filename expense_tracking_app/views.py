@@ -173,4 +173,5 @@ def user_managment(request):
 
 def add_user(request):
     user_form = User_form(request.POST)
-    return render(request,'user_crud.html',{'user_form':user_form })
+    profile_form = Profile_form(request.POST)
+    return render(request,'user_crud.html',{'user_form':user_form,'profile_form':profile_form })

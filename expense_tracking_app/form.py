@@ -25,10 +25,10 @@ class User_form(UserCreationForm):
         model = User
         fields = ['username','email','password1','password2']
         widgets = {
-            'username' :forms.CharInput( attrs={'class': 'form-control'}),
-            'email':   forms.EmailInput(attrs={"class": "form-control"}) ,
-            'password1' :forms.PasswordInput(attrs={'class': 'form-control'}), 
-            'password2' : forms.PasswordInput(attrs={'class': 'form-control'}), 
+            'password1' :forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Password','type':'password'}), 
+            'username' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'UserName'}),
+            'email':   forms.EmailInput(attrs={"class": "form-control", 'placeholder':'Email'}) ,
+            'password2' : forms.TextInput(attrs={'class': 'form-control', 'placeholder':'re-type the Password','type':'password'}), 
         }
 
         # custom validation 
@@ -40,8 +40,11 @@ class User_form(UserCreationForm):
             return password2
 
 class Profile_form(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
-    phone = forms.CharField(widget=forms.TextInput (attrs={'type':'tel','class': 'form-control'})),
+   
     class Meta:
         model = Profile
         fields = ['phone','avatar']
+        widgets = {
+            'phone' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'Phone'}),
+            'avatar':   forms.FileInput(attrs={"class": "form-control", 'placeholder':'Email' ,'type':'file'}) ,
+        }

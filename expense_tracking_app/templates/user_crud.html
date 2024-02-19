@@ -3,9 +3,12 @@
 {% block title%} | Books {% endblock title%}
 <hr />
 {% block mainContent%}
-<form class= "form">===
-    {{user_form.as_p}}
-    <input type="submit">
+<form class="p-5 bg-info-subtle m-5">
+  {% for field in user_form%} {{field}} {%endfor%}
+  <hr />
+  <!--  -->
+  {% for field in profile_form%} {{field}} {%endfor%}
+  <input class="btn btn-primary mt-3" type="submit" />
 </form>
 
 {% endblock mainContent%}
