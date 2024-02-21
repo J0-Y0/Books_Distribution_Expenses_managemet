@@ -43,8 +43,16 @@
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              ><i class="fa-solid fa-user pe-1"></i>
-              <p class="d-none d-sm-inline">{{request.user}}</p>
+              >
+              <!-- <i class="fa-solid fa-user pe-1"></i> -->
+              <img
+              style="width:40px;height:40px;"
+
+      class="rounded-circle account-img"
+      src="{{ request.user.profile.avatar.url }}"
+    />
+
+              <p class="d-none d-sm-inline">{{request.user.profile.first_name}}</p>
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Change password</a></li>

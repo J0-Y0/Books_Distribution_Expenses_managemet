@@ -20,9 +20,14 @@ class Books(models.Model):
     
     category = models.ForeignKey( Book_type,on_delete = models.PROTECT) 
 class Profile(models.Model):
+    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name  = models.CharField(max_length = 20)
+    last_name  = models.CharField(max_length = 20)
+    email  = models.EmailField()
+
     phone  = models.CharField(max_length = 20)
-    avatar = models.ImageField(default='default.jpg', upload_to='User_images')     
+    avatar = models.ImageField( default='default.jpg', upload_to='User_images')     
 
 
 

@@ -172,6 +172,17 @@ def user_managment(request):
     return render(request,'user_managment.html',{'data':data })
 
 def add_user(request):
-    user_form = User_form(request.POST)
-    profile_form = Profile_form(request.POST)
+    user_form = User_form()
+    profile_form = Profile_form()
+    if request.method == 'POST':
+        user_form = User_form(request.POST)
+        profile_form = Profile_form(request.POST,request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            print("-----------------")
+            user =  user_form.save()
+            user_profile = profile_form.save(commit=False)
+            user_profile.user = user
+            user_profile.save()
+           
+            
     return render(request,'user_crud.html',{'user_form':user_form,'profile_form':profile_form })
