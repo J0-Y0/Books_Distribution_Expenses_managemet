@@ -167,11 +167,11 @@ def deleteBook(request,id):
 
 # user
 def user_managment(request):
-    data = Profile.objects.all()
+    users = User.objects.all()
 
-    return render(request,'user_managment.html',{'data':data })
+    return render(request,'user_managment.html',{'users':users })
 
-def add_user(request):
+def add_user(request):  
     user_form = User_form()
     profile_form = Profile_form()
     if request.method == 'POST':
@@ -186,3 +186,8 @@ def add_user(request):
            
             
     return render(request,'user_crud.html',{'user_form':user_form,'profile_form':profile_form })
+def editUser(request,id):
+    pass
+def deleteUser(request,id):
+    pass
+   

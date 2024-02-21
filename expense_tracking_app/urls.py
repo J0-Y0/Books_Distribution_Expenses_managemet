@@ -12,5 +12,8 @@ urlpatterns = [
 
     path('users', views.user_managment, name = 'users' ),
     path('add_user', views.add_user, name='add_user'),
+    path('add_book', views.add_book, name='add_book'),
+    path('editUser/<int:id>/', views.editUser, name='editUser'),
+    path('deleteUser/<int:id>/', views.deleteUser, name='deleteUser'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
