@@ -60,12 +60,12 @@ def add_book(request):
     form = Books_form()
     message = ""
     # add individually 
-    if request.method == 'POST':
+    if request.method == 'POST' and 'idNumber' in request.POST:
         form = Books_form(request.POST)
 
-        if form.is_valid():
+        if form and  form.is_valid():
             book =  form.save( commit=False)
-            book.modification_log = "zare |yosef |add"
+            book.modification_log = "today |yosef |add"
             book.save()
             message = "Done,Record saved "
             form = Books_form()
@@ -105,7 +105,8 @@ def add_book(request):
         "description":"Add a book, fill out all the required field, and save. You can add multiple records as you wish, and you have the option to import records from an Excel sheet by clicking the import button.",
         "submitBtn":"Save,Add Another",
         "form":form,
-        "message":message
+        "message":message,
+        "add_category":add_category(request),
       
     }
     return render(request,'book_crud.html',context)
@@ -163,6 +164,19 @@ def deleteBook(request,id):
       
     }
     return render(request,'book_crud.html',context)
+
+# book category
+def add_category(request):
+    category_form = Category_form()
+    if request.method == 'POST':
+        category_form = Category_form(request.POST)
+        if category_form.is_valid() :
+            category = category_form.save(commit=False)
+            category.modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Create"
+            category.save()
+            category_form = Category_form()
+
+    return category_form
 
 
 # user

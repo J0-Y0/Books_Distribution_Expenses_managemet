@@ -53,3 +53,11 @@ class Profile_form(forms.ModelForm):
             'phone' :forms.TextInput( attrs={'type':'tel' ,'class': 'form-control', 'placeholder':'Phone'}),
             'avatar':   forms.FileInput(attrs={'required':'False',"class": "form-control"}) ,
         }
+
+class Category_form(forms.ModelForm):
+    class Meta:
+        model= Book_type
+        fields = ['type_name']
+        widgets = {
+            'type_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Ex,Data Science'})
+        }
