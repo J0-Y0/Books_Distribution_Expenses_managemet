@@ -68,7 +68,7 @@
       <aside class="d-none d-lg-block col-lg-2 sidebar">
         {%include 'sidemenu.html'%}
       </aside>
-      <aside class="col-12 col-lg-10 mainContent position-relative pb-5 mb-5 px-0" >
+      <aside class="  col-lg-10 mainContent position-relative pb-5 mb-5 px-0" >
        
 
    
@@ -102,7 +102,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">{%include 'sidemenu.html'%}</div>
+      <div class="  offcanvas-body">{%include 'sidemenu.html'%}</div>
     </div>
 
     <!-- bootstrap js  CDN -->
@@ -116,5 +116,33 @@
       src="https://kit.fontawesome.com/9476511420.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      //{%if 'Delete' in  title   or 'Remove' in title  %}
+      const inputs = document.getElementsByTagName('input')
+      const  selects = document.getElementsByTagName('select')
+      for(var i = 0;i<inputs.length;i++){
+       
+        if (inputs[i].type == 'submit' || inputs[i].name == "csrfmiddlewaretoken"){
+          inputs[i].classList += " btn btn-outline-danger px-5"
+
+        }
+        else{
+          inputs[i].disabled = true
+          inputs[i].classList += " bg-danger-subtle"
+        }
+      
+      }
+        for(var i = 0;i<selects.length;i++){
+          selects[i].disabled = true
+          selects[i].classList += " bg-danger-subtle "
+      }
+
+            document.getElementById('new-category').style.display = "none  "
+
+
+
+      // {%endif%}
+
+    </script>
   </body>
 </html>

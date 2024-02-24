@@ -23,7 +23,8 @@ def home(request):
         
         category = {"name":type,"books":len(books),"expense":expense,"average" : average_expense}
         catagories.append(category)
-        data = {"label":type.type_name,"y":round(expense)}
+        y = round(expense) if len(books)>0 else 0
+        data = {"label":type.type_name,"y":y}
         datapoints.append(data)
         
     all_books = Books.objects.all()
@@ -61,7 +62,7 @@ def add_book(request):
     message = ""
     # add individually 
     if request.method == 'POST' and 'idNumber' in request.POST:
-        form = Books_form(request.POST)
+        form = Books_form(request.POST) 
 
         if form and  form.is_valid():
             book =  form.save( commit=False)
@@ -133,7 +134,8 @@ def editBook(request,id):
         "description":"Edit book data effortlessly: simply modify the field data, save your changes, and watch as they're promptly updated in the database",
         "submitBtn":"Update",
         "form":form,
-        "message":message
+        "message":message,
+         "add_category":add_category(request),
       
     }
     return render(request,'book_crud.html',context)
@@ -144,15 +146,12 @@ def deleteBook(request,id):
     if request.method == 'POST':
         form = Books_form(request.POST, instance=book)
 
-        if form.is_valid():
-            message = "Done,Record Deleted "
-
+        try:
             book.delete()
-            return redirect('books')  # Redirect to a success URL
-
-        else:
-            form = Books_form(instance=book)
-            message = "unable to save please try again !"
+            message = "Done,Record Deleted "
+            return render(request,'success.html',{"message":message,"header":"Completed",'backto':'books'})
+        except Exception as e:         
+            message = "unable to save please try again !"+e
 
     context = {
         "title":"Delete Records",
@@ -185,7 +184,8 @@ def user_managment(request):
 
     return render(request,'user_managment.html',{'users':users })
 
-def add_user(request):  
+def add_user(request): 
+    message = "" 
     user_form = User_form()
     profile_form = Profile_form()
     if request.method == 'POST':
@@ -197,11 +197,90 @@ def add_user(request):
             user_profile = profile_form.save(commit=False)
             user_profile.user = user
             user_profile.save()
+            user_form = User_form()
+            profile_form = Profile_form()
+            message = {'msg':"Done,User Created",'type':'success'}
+        else:
+            message = {'msg': "Unable to create user",'type':'danger'}
+
            
+           
+           
+    context = {
+        "title":"Add User",
+        "header":"Add record | Creating New User ",
+        "description":"Add a User, fill out all the required field, and save. You can add multiple records as you wish,",
+        "submitBtn":"Save ",
+        'user_form':user_form,
+        'profile_form':profile_form,
+        "message":message,
+      
+    }
             
-    return render(request,'user_crud.html',{'user_form':user_form,'profile_form':profile_form })
+    return render(request,'user_crud.html',context)
 def editUser(request,id):
-    pass
+    user = User.objects.get(id = id)
+    message = "" 
+    
+    if request.method == 'POST':
+        user_form = User_form(request.POST)
+        profile_form = Profile_form(request.POST,request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user =  user_form.save()
+            user_profile = profile_form.save(commit=False)
+            user_profile.user = user
+            user_profile.save()
+            user_form = User_form()
+            profile_form = Profile_form()
+            message = {'msg':"Done,User Created",'type':'success'}
+        else:
+            message = {'msg': "Unable to create user",'type':'danger'}
+    else:
+        profile_form = Profile_form( instance=user.profile)
+
+        user_form = User_form(instance = user)
+           
+           
+           
+    context = {
+        "title":"Edit User",
+        "header":"Edit record |Update User ",
+        "description":"Edit User data effortlessly: simply modify the field data, save your changes, and watch as they're promptly updated in the database",
+        "submitBtn":"Update ",
+        'user_form':user_form,
+        'profile_form':profile_form,
+        "message":message,
+      
+    }
+    return render(request,'user_crud.html',context)
+
+    
 def deleteUser(request,id):
-    pass
+    message = "" 
+    user = User.objects.get(id = id)
+    if request.method == 'POST':
+        profile_form = Profile_form(request.POST,request.FILES,instance = user.profile)
+        try:
+            User.objects.get(id = id).delete()            
+            message = "Done,User Account Removed"
+            return render(request,'success.html',{"message":message,"header":"Completed",'backto':'users'})
+            
+        except Exception as a:
+            message = {'msg': a,'type':'danger'}
+            
+    else:
+        profile_form = Profile_form(instance=user.profile)
+                      
+    context = {
+        "title":"Remove User",
+        "header":"Data removing | Removing User Account ",
+        "description":"Erasing User Data,Are you sure you want to delete this User? Deleting it is permanent, with no option for recovery once it's lost. If you're uncertain, please cancel the action",
+        "submitBtn":"Delete ",
+       
+        'profile_form':profile_form,
+        "message":message,
+      
+    }
+            
+    return render(request,'user_crud.html',context)
    

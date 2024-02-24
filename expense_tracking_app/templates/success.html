@@ -4,10 +4,25 @@
 <hr />
 {% block mainContent%}
 
-<p class="display-3">{{header}}</p>
-<hr />
-{{message}}
+<div class="d-flex justify-content-center align-content-center p-5 m-5">
 
-<a class="btn btn-outline-success rounded-0" href="">get it </a>
+    <div class="card col-6 ">
+        <div class="card-header">
+            <p class=" h4 m-0 p-0 text-success"><i class="fa-regular fa-circle-check pe-1 "></i>{{header}}</p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Task Completed</h5>
+          <p class="card-text">{{message}}</p>
+
+          <a
+          class="btn btn-success px-4"
+          {% if backto == 'users' %}  href="  {% url 'users'  %}" {%elif backto == 'books' %} href="  {% url 'books'  %}" {% else %} href="  {% url 'home'  %}"{%endif%}
+         
+          >Go Back
+        </a>
+                </div>
+      </div>
+</div>
+
 
 {% endblock mainContent%}

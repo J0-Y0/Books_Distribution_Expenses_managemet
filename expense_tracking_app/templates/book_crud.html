@@ -56,7 +56,7 @@
                   <span class="d-flex justify-content-between">
                     <p class="text-secondary p-0 m-0">
                       {{field.label}}  {%if forloop.last%}
-                      <button type="button" class="btn btn-outline-primary rounded-0 p-0 px-1  border-0 " data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                      <button type="button"   id = "new-category" class="btn btn-outline-primary rounded-0 p-0 px-1  border-0 " data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                         + New Category
                       </button>
                       {%endif%} 
@@ -79,8 +79,10 @@
                 
                   {{field}}  {%endfor%}
               
-                  <input class="btn m-0 btn-outline-primary border-1 rounded-0" type="submit" value="{{submitBtn}}" />
+                  <div class="input-group">
+                    <input class="form-control btn m-0 btn-outline-primary border-1 rounded-0" type="submit" value="{{submitBtn}}" />
                   <a class="btn btn-outline-secondary rounded-0 " href="{% url 'books'%}">cancel</a>
+                  </div>
                 </form> 
               </div>
               

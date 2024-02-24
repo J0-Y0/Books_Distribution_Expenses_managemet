@@ -5,7 +5,6 @@
 <hr />
 {% block mainContent%}
 
-
 <nav style="--bs-breadcrumb-divider: ' |';" aria-label="breadcrumb">
   <ol class="breadcrumb p-2 bg-primary-subtle "> 
     <li class="breadcrumb-item text-primary"><a href="{%url 'users' %}">User Management  </a></li>
@@ -16,8 +15,7 @@
 <div class="card m-2 mt-3 ">
   <div class="card-header d-flex justify-content-between"> <b>{{header}} </b>    
 
-    
-
+    <b class="text-{{message.type}}"><i class="fa-solid {% if message.type == error  %} fa-triangle-exclamation {%else%} fa-regular fa-circle-check  {%endif%} px-2 "></i> {{message.msg}}</b>
   </div>
   <div class="card-body py-0 px-"> 
     <p class="card-text">
@@ -31,7 +29,6 @@
                 <h3>{{header}}</h3>
                 <hr>
                 {{description}}
-=--
 
               </div>
             </div>
@@ -41,7 +38,7 @@
             </div>
 
               <div class=" border ps-5  border-2  border-top-0 border-bottom-0 border-end-0  col-12 col-md-6 col-lg-6">
-                <form method="POST"  enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                   {% csrf_token %} 
                   {% for field in profile_form%}
                       <span class="d-flex justify-content-between">
@@ -64,7 +61,16 @@
                               {% endfor %}
                             </span>
                           </span>
-                              {{field}}  {%endfor%}
+                          
+                  {% if field.name == "avatar" %}
+                  
+                  <!-- <img src="{{field.value.url}}" alt="jjj"/> -->
+                  <input type="file"   name="{{ field.name }}" id="{{ field.id_for_label }}" accept="image/*">
+                 {% else %}
+                  {{ field }}
+              {% endif %}
+
+                              {%endfor%}
                   <!---->
                   {% for field in user_form%} 
                   <span class="d-flex justify-content-between">
@@ -88,13 +94,19 @@
                          
                       </span>
                   </span>
-                  {{field}}  {%endfor%}
+               
+
+                  <input  value="{{field.value}}" class="form-control" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
+                  {%endfor%}
                   
                 
                 
               
-                  <input class="btn m-0 btn-outline-primary border-1 rounded-0" type="submit" value="{{submitBtn}}" />
-                  <a class="btn btn-outline-secondary rounded-0 " href="{% url 'books'%}">cancel</a>
+                  <div class=" input-group mt-2">
+                    
+                  <input class="btn m-0 btn-outline-primary border-1 rounded-0 form-control" type="submit" value="{{submitBtn}}" />
+                  <a class="btn btn-outline-secondary rounded-0 " href="{% url 'users'%}">cancel</a>
+                  </div>
                 </form> 
               </div>
               
