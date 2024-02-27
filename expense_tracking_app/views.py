@@ -176,14 +176,11 @@ def add_category(request):
             category_form = Category_form()
 
     return category_form
-
-
 # user
 def user_managment(request):
     users = User.objects.all()
 
     return render(request,'user_managment.html',{'users':users })
-
 def add_user(request): 
     message = "" 
     user_form = User_form()
@@ -223,16 +220,24 @@ def editUser(request,id):
     message = "" 
     
     if request.method == 'POST':
-        user_form = User_form(request.POST)
-        profile_form = Profile_form(request.POST,request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
-            user =  user_form.save()
-            user_profile = profile_form.save(commit=False)
-            user_profile.user = user
-            user_profile.save()
-            user_form = User_form()
-            profile_form = Profile_form()
-            message = {'msg':"Done,User Created",'type':'success'}
+        user_form = User_form(request.POST,instance=user)
+        profile_form = Profile_form(request.POST,request.FILES,instance=user.profile)
+        if profile_form.is_valid():
+            if  'edit_toggle' in  request.POST:
+                togglevalue  = request.POST.get('edit_toggle')
+                if togglevalue == 'edited':
+                    if user_form.is_valid():
+                        user =  user_form.save()
+                        user_profile = profile_form.save(commit=False)
+                        user_profile.user = user
+                        user_profile.save()
+                        return redirect('users')
+                    else:
+                        message = {'msg': "Unable to update user",'type':'danger'}
+            else:
+                profile_form.save()
+                return redirect('users')
+
         else:
             message = {'msg': "Unable to create user",'type':'danger'}
     else:
@@ -252,9 +257,7 @@ def editUser(request,id):
         "message":message,
       
     }
-    return render(request,'user_crud.html',context)
-
-    
+    return render(request,'user_crud.html',context)   
 def deleteUser(request,id):
     message = "" 
     user = User.objects.get(id = id)
@@ -283,4 +286,5 @@ def deleteUser(request,id):
     }
             
     return render(request,'user_crud.html',context)
-   
+def login(request):
+    return render(request,'login.html')

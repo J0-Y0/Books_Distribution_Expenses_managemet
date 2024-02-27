@@ -61,17 +61,16 @@
                               {% endfor %}
                             </span>
                           </span>
-                          
-                  {% if field.name == "avatar" %}
-                  
-                  <!-- <img src="{{field.value.url}}" alt="jjj"/> -->
-                  <input type="file"   name="{{ field.name }}" id="{{ field.id_for_label }}" accept="image/*">
-                 {% else %}
-                  {{ field }}
-              {% endif %}
+                          {{ field }}
+                        
 
-                              {%endfor%}
-                  <!---->
+                {%endfor%}
+                
+                <div class="form-check form-switch pt-3 ">
+                  <input value="edited" name = 'edit_toggle' onclick="toggle()" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                  <label class="form-check-label" for="flexSwitchCheckDefault">Edit Credential</label>
+                </div>
+                  
                   {% for field in user_form%} 
                   <span class="d-flex justify-content-between">
                     <p class="text-secondary p-0 m-0">
@@ -96,11 +95,11 @@
                   </span>
                
 
-                  <input  value="{{field.value}}" class="form-control" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
+                  <input disabled value="{{field.value}}" class=" form-control userfield" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
                   {%endfor%}
-                  
-                
-                
+
+                 
+              
               
                   <div class=" input-group mt-2">
                     
@@ -117,6 +116,15 @@
          
   </div>
 </div>
+<script>
+function toggle(){
+  const user_field = document.getElementsByClassName('userfield'); 
+  for(var i = 0;i<user_field.length;i++){
+    user_field[i].disabled = !user_field[i].disabled
+  }
+
+}
+</script>
 
 
 {% endblock mainContent%}
