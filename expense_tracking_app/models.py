@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 class Book_type(models.Model):
-    type_name =models.CharField(max_length = 500 ,unique =True)
+    type_name =models.CharField(max_length = 500 ,unique =True ,null = True)
     modification_log = models.CharField(max_length = 2000)
     def __str__(self):
         return self.type_name
@@ -13,12 +13,12 @@ class Books(models.Model):
     subtitle = models.CharField(max_length =500 ,null = True ,default ="")
     author = models.CharField(max_length =100 ,null = False)
     publisher = models.CharField(max_length =500 ,null = False)
-    published_date = models.DateField( max_length =1000 ,null = False)
+    published_date = models.DateField( max_length =1000 ,null = True)
     distribution_expense = models.DecimalField(null = False,max_digits=8,decimal_places = 2)
    
     modification_log = models.CharField(max_length = 2000)
     
-    category = models.ForeignKey( Book_type,on_delete = models.PROTECT) 
+    category = models.ForeignKey( Book_type,on_delete = models.PROTECT,null =True) 
 class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
