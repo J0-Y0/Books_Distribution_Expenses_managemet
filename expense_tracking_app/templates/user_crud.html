@@ -24,12 +24,7 @@
             <div class="row ">
               <div class="col-12 d-flex justify-content-center pb-0 mb-0">
 
-                {% for field in profile_form%}
-                {%if field.name == "avatar" %}
-                <img   src="{{field.value.url}}" class="pb-0 mb-0" alt="profile" width="30%" height="50%">
-
-                {%endif%}
-                {%endfor%}
+                
 
                 <!-- <img   src="{{profile_form.field.value}}"  alt="Logo" width="300" height="300"> -->
                 <!-- <img   src="{% static 'addBook.png'%}  "  alt="Logo" width="300" height="300"> -->
@@ -72,14 +67,14 @@
                           </span>
 
                         
-                          {%if field.name == "avatar" and title == 'Edit User' %}
+                          {%if field.name == "avatar" and title != 'Add User' %}
                           
                          <div class="row  ">
                             <img   src="{{field.value.url}}" class="col-2 m-0" alt="Profile" width="5%" height="10%">
                           <div class="col-10 ">
                             <p class="pt-3 h5">Change
                             </p>
-                            <p>{{ field }}</p>
+                            <p>{{field }}</p>
 
                           </div>
 
@@ -94,7 +89,7 @@
           
                 {%endfor%}
                 
-                <div class="form-check form-switch pt-3 ">
+                <div class="  {% if  title != 'Edit User'  %} d-none {%endif%} form-check form-switch pt-3 ">
                   <input value="edited" name = 'edit_toggle' onclick="toggle()" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                   <label class="form-check-label" for="flexSwitchCheckDefault">Edit Credential</label>
                 </div>
@@ -123,7 +118,7 @@
                   </span>
                
 
-                  <input disabled value="{{field.value}}" class=" form-control userfield" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
+                  <input {% if  title != "Add User"  %} disabled {%endif%}  placeholder="{{field.label}}"  {%if  field.name == 'username' %}  value="{{field.value}}" {%endif%} class=" form-control userfield" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
                   {%endfor%}
 
                  

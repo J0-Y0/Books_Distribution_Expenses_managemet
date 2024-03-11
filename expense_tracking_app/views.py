@@ -251,6 +251,10 @@ def editUser(request,id):
                 togglevalue  = request.POST.get('edit_toggle')
                 if togglevalue == 'edited':
                     username = user_form.cleaned_data['username']
+                    # if user.username != username:
+                    #         user.username =username
+                    # else:
+                    #     user_form.
                     if user_form.is_valid() :
                         if user.username != username:
                             user.username =username 
@@ -269,9 +273,9 @@ def editUser(request,id):
         else:
             message = {'msg': "Unable to create user",'type':'danger'}
     else:
-        profile_form = Profile_form( instance=user.profile)
+        profile_form = Profile_form(request.POST, instance=user.profile)
 
-        user_form = User_form(instance = user)
+        user_form = User_form(request.POST,instance=user)
            
            
            

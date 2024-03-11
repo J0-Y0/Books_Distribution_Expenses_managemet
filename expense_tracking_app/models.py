@@ -27,7 +27,7 @@ class Profile(models.Model):
     email  = models.EmailField()
 
     phone  = models.CharField(max_length = 20)
-    avatar = models.ImageField( default='default.svg', upload_to='User_images')     
+    avatar = models.ImageField( default='default.jpg', upload_to='User_images')     
     
     user_group = models.ForeignKey(Group,on_delete = models.PROTECT)
 
