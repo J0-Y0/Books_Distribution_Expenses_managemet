@@ -19,6 +19,8 @@ def home(request):
 
     catagories = []
     datapoints = []
+    all_books = Books.objects.all()
+    total_expense= all_books.aggregate(sum = Sum('distribution_expense'))['sum']
     for type in types:
         
         books = Books.objects.filter(category = type)
@@ -27,12 +29,13 @@ def home(request):
         
         category = {"name":type,"books":len(books),"expense":expense,"average" : average_expense}
         catagories.append(category)
-        y = round(expense) if len(books)>0 else 0
+        y = round((expense/total_expense)*100) if len(books)>0 else 0
         data = {"label":type.type_name,"y":y}
         datapoints.append(data)
         
-    all_books = Books.objects.all()
-    total = {"books":len(all_books),"category":len(catagories),"expense":all_books.aggregate(sum = Sum('distribution_expense'))['sum'],"average":all_books.aggregate(avg = Avg('distribution_expense'))['avg']}
+    
+    
+    total = {"books":len(all_books),"category":len(catagories),"expense":total_expense,"average":all_books.aggregate(avg = Avg('distribution_expense'))['avg']}
         
     context ={"datapoints":datapoints,"catagories":catagories,"total":total}
     
@@ -316,7 +319,10 @@ def deleteUser(request,id):
 # authentication and authorization  
 def user_login(request):
     error,succuss = "",""
-    if request.method == "POST":
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    elif request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request,username = username, password = password)

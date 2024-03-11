@@ -80,7 +80,6 @@ td {
   /* height: 100vh; */
 }
 .login {
-  width: 40vw;
   margin-top: 8%;
   border-radius: 0;
   background: #4e618c;
@@ -88,11 +87,20 @@ td {
   border-bottom: #ffffff solid 2px;
 }
 .login form {
-  padding: 3%;
+  padding: 4%;
 }
 .login i {
   background-color: #537ab5a3;
   color: rgb(255, 255, 255);
   padding-top: 25px;
-  font-size: 20vh;
+  font-size: 7vw;
+}
+
+.mainContent {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.jo {
+  scroll-margin-top: 50px; /* Adjust the scroll margin as needed */
 }

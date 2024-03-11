@@ -5,10 +5,10 @@
 <hr />
 {% block mainContent%}
 
-<div id="chartContainer" style="width: 100%; height: 360px "></div>
+<div id="chartContainer" style="width: 100%; height: 360px " class="my-4"></div>
 <div >
 
-  <div class="card bg-success-subtle position-sticky bottom-0">
+  <div class=" jo card bg-success-subtle position-sticky bottom-0">
     <div class="card-header"><b>Expense</b></div>
     <div class="card-body ">
       
@@ -80,6 +80,18 @@
         });
         chart.render();
     }
+
+
+  const parentContainer = document.querySelector('.mainContent');
+const childElement = document.querySelector('.jo');
+
+childElement.addEventListener('mouseenter', () => {
+  parentContainer.scrollTop = 300; // Move scroll bar to bottom
+});
+
+childElement.addEventListener('mouseleave', () => {
+  parentContainer.scrollTop = 0; // Move scroll bar to top (original position)
+});
   </script>
 {% endblock mainContent%}
 </div>

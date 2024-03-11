@@ -27,8 +27,10 @@
       </p>
 
       <div class="login row">
-        <i class="fa-solid fa-shield-cat display-1 col-3 text-center"></i>
-        <form method="post" class="col-9">
+        <i
+          class="fa-solid fa-shield-halved display-1 d-none d-md-block col-md-3 text-center"
+        ></i>
+        <form method="post" class="col-12 col-md-9">
           {% csrf_token %}
           <input
             class="rounded-0 form-control m-1"
