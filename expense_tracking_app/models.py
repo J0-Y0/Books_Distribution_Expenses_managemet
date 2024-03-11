@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib.auth.models import Group
 class Book_type(models.Model):
     type_name =models.CharField(max_length = 500 ,unique =True)
     modification_log = models.CharField(max_length = 2000)
@@ -28,8 +28,8 @@ class Profile(models.Model):
 
     phone  = models.CharField(max_length = 20)
     avatar = models.ImageField( default='default.jpg', upload_to='User_images')     
-
-
+    
+    user_group = models.ForeignKey(Group,on_delete = models.PROTECT)
 
 # modification log 
 # append:

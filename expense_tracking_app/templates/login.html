@@ -25,17 +25,19 @@
       class="contianer d-flex justify-content-center"
       style="height: 100vh; background-color: rgb(160, 153, 192)"
     >
-      <form class="w-25 mt-5 pt-5">
+      <form class="w-25 mt-5 pt-5" method="post">
         <div class="p-3" style="border: solid rgb(68, 0, 255) 1px">
           <input
             class="rounded-0 form-control m-1"
             type="text"
             placeholder="username"
+            name="username"
           />
           <input
             class="rounded-0 form-control m-1"
             type="password"
             placeholder="Password"
+            name="password"
           />
           <input
             class="rounded-0 btn btn-primary form-control m-1"
@@ -44,6 +46,7 @@
           />
         </div>
       </form>
+      <p class="display-5 text-danger">{{error}}</p>
     </div>
 
     <script

@@ -21,17 +21,17 @@ class Books_form(forms.ModelForm):
                 }
             
 class User_form(UserCreationForm):
+    
     class Meta:
         model = User
         fields = ['username','password1','password2']
         widgets = {
-            'first_name' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'First name'}),
-            'last_name' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'Last Name '}),
 
-            'password1' :forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Password','type':'password'}), 
+            'password1' :forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Password','type':'password'}),
             'username' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'UserName'}),
-            'email':   forms.EmailInput(attrs={"class": "form-control", 'placeholder':'Email'}) ,
             'password2' : forms.TextInput(attrs={'class': 'form-control', 'placeholder':'re-type the Password','type':'password'}), 
+            # e"groups":forms.Select(attrs={'required':'true', "class": "form-select mb-1" }),
+
         }
         # custom validation 
         def clean_password2(self):
@@ -40,18 +40,28 @@ class User_form(UserCreationForm):
             if password1 and password2 and password1 != password2:
                 raise forms.ValidationError("Passwords do not match")
             return password2
+        # def clean_username(self):
+        #     username = self.cleaned_data.get('username')
+        #     # Check if username has been changed
+        #     if self.instance.username == username:
+        #         # If changed, validate uniqueness
+        #         if User.objects.filter(username=username).exists():
+        #             raise forms.ValidationError("A user----- with that username already exists.")
+        #     return username
 
 class Profile_form(forms.ModelForm):
     class Meta:
         # avatar = forms.ImageField(widget=forms.FileInput( attrs={'class': 'form-control-file'}))
         model = Profile
-        fields = ['first_name','last_name','phone','email','avatar']
+        fields = ['first_name','last_name','phone','email','avatar','user_group']
         widgets = {
             'first_name' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'First Name '}),
             'last_name' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'Last Name'}),
             'email' :forms.EmailInput( attrs={'class': 'form-control', 'placeholder':'Email'}),
             'phone' :forms.TextInput( attrs={'type':'tel' ,'class': 'form-control', 'placeholder':'Phone'}),
-            'avatar':   forms.FileInput(attrs={'required':'False',"class": "form-control"}) ,
+            'avatar':   forms.FileInput(attrs={"class": "form-control"}) ,
+            "user_group":forms.Select(attrs={'required':'true', "class": "form-select mb-1" }),
+
         }
 
 class Category_form(forms.ModelForm):
