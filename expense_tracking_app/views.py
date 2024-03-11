@@ -303,13 +303,15 @@ def deleteUser(request,id):
 
 # authentication and authorization  
 def login(request):
-    username = request.POST['username']
-    password = request.POst['password']
-    user = authenticate(request,username = username, password = password)
-    if user is not None :  
-        succuss = "good ,u login " 
-    else:
-        error = "username or password incorrect"
+    error,succuss = "",""
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request,username = username, password = password)
+        if user is not None :  
+            succuss = "good ,u login " 
+        else:
+            error = "username or password incorrect"
 
     context = {
         "error":error,

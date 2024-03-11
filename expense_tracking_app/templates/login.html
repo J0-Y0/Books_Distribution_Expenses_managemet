@@ -20,13 +20,16 @@
     <title>Rumi {%block title %} {%endblock title%}</title>
   </head>
 
-  <body>
-    <div
-      class="contianer d-flex justify-content-center"
-      style="height: 100vh; background-color: rgb(160, 153, 192)"
-    >
-      <form class="w-25 mt-5 pt-5" method="post">
-        <div class="p-3" style="border: solid rgb(68, 0, 255) 1px">
+  <body class="loginPage">
+    <div class="d-grid justify-content-center">
+      <p class="display-3 text-light mt-3 text-center">
+        <u>. Portal for Rumi Press .</u>
+      </p>
+
+      <div class="login row">
+        <i class="fa-solid fa-shield-cat display-1 col-3 text-center"></i>
+        <form method="post" class="col-9">
+          {% csrf_token %}
           <input
             class="rounded-0 form-control m-1"
             type="text"
@@ -39,14 +42,17 @@
             placeholder="Password"
             name="password"
           />
+
           <input
             class="rounded-0 btn btn-primary form-control m-1"
             type="submit"
             value="Login"
           />
-        </div>
-      </form>
-      <p class="display-5 text-danger">{{error}}</p>
+          <p class="ms-1 mt-2 p-1 text-danger alert alert-danger alert-sm">
+            {{error}}
+          </p>
+        </form>
+      </div>
     </div>
 
     <script

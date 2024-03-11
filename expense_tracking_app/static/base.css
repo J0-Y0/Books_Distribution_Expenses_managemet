@@ -70,3 +70,29 @@ td {
   max-width: fit-content;
   text-wrap: wrap;
 }
+.loginPage {
+  background-image: url("shelf.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: hsl(221, 31%, 53%);
+  background-blend-mode: multiply;
+  /* height: 100vh; */
+}
+.login {
+  width: 40vw;
+  margin-top: 8%;
+  border-radius: 0;
+  background: #4e618c;
+  box-shadow: 30px 30px 61px #415174, -30px -30px 61px #5b71a4;
+  border-bottom: #ffffff solid 2px;
+}
+.login form {
+  padding: 3%;
+}
+.login i {
+  background-color: #537ab5a3;
+  color: rgb(255, 255, 255);
+  padding-top: 25px;
+  font-size: 20vh;
+}
