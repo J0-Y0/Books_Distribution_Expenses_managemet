@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Group,User,Permission
-from django.contrib.auth import authenticate, login
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import redirect, render
 from openpyxl import load_workbook
 from django.db.models import Sum,Avg
@@ -13,7 +13,7 @@ from .models import *
 from .form import *
 from .filter import BookFilter
 
-
+@login_required(login_url='login')
 def home(request):
     types = Book_type.objects.all()
 
@@ -37,7 +37,9 @@ def home(request):
     context ={"datapoints":datapoints,"catagories":catagories,"total":total}
     
     return render(request,"home.html", context)
+
 # book
+@login_required(login_url='login')
 def book_management(request):
     
     books_list = Books.objects.all()  
@@ -61,6 +63,7 @@ def book_management(request):
 
     
     return render(request,'book_management.html',{"books":books,"bookFilter":bookFilter,"page_offset":page_offset})
+@login_required(login_url='login')
 def add_book(request):
     form = Books_form()
     message = ""
@@ -115,6 +118,7 @@ def add_book(request):
       
     }
     return render(request,'book_crud.html',context)
+@login_required(login_url='login')
 def editBook(request,id):
     book = Books.objects.get(pk = id)
     message = ""
@@ -143,6 +147,7 @@ def editBook(request,id):
       
     }
     return render(request,'book_crud.html',context)
+@login_required(login_url='login')
 def deleteBook(request,id):
     book = Books.objects.get(pk = id)
     form = Books_form(instance=book)
@@ -169,6 +174,7 @@ def deleteBook(request,id):
     return render(request,'book_crud.html',context)
 
 # book category
+@login_required(login_url='login')
 def add_category(request):
     category_form = Category_form()
     if request.method == 'POST':
@@ -181,10 +187,12 @@ def add_category(request):
 
     return category_form
 # user
+@login_required( login_url='/login')
 def user_managment(request):
     users = User.objects.all()
 
     return render(request,'user_managment.html',{'users':users })
+@login_required(login_url='login')
 def add_user(request): 
     message = ""     
     
@@ -225,6 +233,7 @@ def add_user(request):
     }
             
     return render(request,'user_crud.html',context)
+@login_required(login_url='login')
 def editUser(request,id):
     user = User.objects.get(id = id)
     message = "" 
@@ -272,6 +281,7 @@ def editUser(request,id):
       
     }
     return render(request,'user_crud.html',context)   
+@login_required(login_url='login')
 def deleteUser(request,id):
     message = "" 
     user = User.objects.get(id = id)
@@ -309,16 +319,18 @@ def user_login(request):
         password = request.POST['password']
         user = authenticate(request,username = username, password = password)
         if user is not None :  
-            login(request, user)
+            login(request,user)
             return redirect('home')
         else:
             error  = "username or password incorrect"
             return render(request,'login.html' ,{"error":error})
     else:
         return render(request,'login.html')
-
+def user_logout(request):
+    logout(request)
+    return redirect('login')
     
-
+@login_required(login_url='login')
 def define_group():
     group_user,created =Group.objects.get_or_create(name = 'User') 
     group_admin,created =Group.objects.get_or_create(name = 'Admin') 
