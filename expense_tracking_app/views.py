@@ -302,22 +302,22 @@ def deleteUser(request,id):
     return render(request,'user_crud.html',context)
 
 # authentication and authorization  
-def login(request):
+def user_login(request):
     error,succuss = "",""
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request,username = username, password = password)
         if user is not None :  
-            succuss = "good ,u login " 
+            login(request, user)
+            return redirect('home')
         else:
-            error = "username or password incorrect"
+            error  = "username or password incorrect"
+            return render(request,'login.html' ,{"error":error})
+    else:
+        return render(request,'login.html')
 
-    context = {
-        "error":error,
-        "succuss":succuss
-    }
-    return render(request,'login.html' ,context)
+    
 
 def define_group():
     group_user,created =Group.objects.get_or_create(name = 'User') 
