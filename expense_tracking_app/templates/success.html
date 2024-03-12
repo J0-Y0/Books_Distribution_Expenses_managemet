@@ -4,10 +4,53 @@
 <hr />
 {% block mainContent%}
 
-<p class="display-3">{{header}}</p>
-<hr />
-{{message}}
+<div class="d-flex justify-content-center align-content-center ">
 
-<a class="btn btn-outline-success rounded-0" href="">get it </a>
+    <div class="card px-1 mt-3">
+        <div class="card-header">
+            <p class="text-info"><i class="fa-regular fa-circle-check pe-1 "></i>{{header}}</p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title h4 ">Task Completed</h5>
+          <p class="card-text  ">{{message}}</p>
+          
+          <table class="table table-danger text-danger-emphasis">
+            
+            <thead class="table-warning">
+              <tr>
+                <td>#</td><td>ID</td> <td>Title</td> <td>Subtitle</td><td>Authors</td> <td>Publisher</td><td>	Published_date</td> <td>	Category</td><td>	Expense</td> <td>Reason</td>
+            </tr>
+            </thead>
+            <tbody>
+              {% for row in data%}
+                    <tr class="word-wrap">
+                      <td>{{forloop.counter}}</td>
+                      {% for cell in row%}
+                          {% if cell  in row.8  %}
+                              {%if cell == row.8 %}
+                                  <td style="cursor: pointer;" class="text-info"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title= "{{cell}}"> <i class="fa-solid fa-circle-info"></i></td>
+                              {%else%}
+                                  <td  style="cursor: pointer ;" class=" text-danger"    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title= "{{row.8}}"> <i class="fa-solid fa-triangle-exclamation"></i> {{cell}}</td>
+                              {%endif%}
+
+                            {% else %}
+                              <td> {{cell}}</td>
+                            {%endif%}
+
+                      {%endfor%}
+                    </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <a
+          class="btn btn-success px-4"
+          {% if backto == 'users' %}  href="  {% url 'users'  %}" {%elif backto == 'books' %} href="  {% url 'books'  %}" {% else %} href="  {% url 'home'  %}"{%endif%}
+         
+          >Go Back
+        </a>
+                </div>
+      </div>
+</div>
+
 
 {% endblock mainContent%}

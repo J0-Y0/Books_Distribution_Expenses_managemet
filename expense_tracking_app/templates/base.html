@@ -43,12 +43,23 @@
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              ><i class="fa-solid fa-user pe-1"></i>
-              <p class="d-none d-sm-inline">{{request.user}}</p>
+            >
+              <!-- <i class="fa-solid fa-user pe-1"></i> -->
+              <img
+                style="width: 40px; height: 40px"
+                class="rounded-circle account-img"
+                src="{{ request.user.profile.avatar.url }}"
+              />
+
+              <p class="d-none d-sm-inline">
+                {{request.user.profile.first_name}}
+              </p>
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Change password</a></li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
+              <li>
+                <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+              </li>
               <li><a class="dropdown-item" href="#">Theme</a></li>
             </ul>
           </div>
@@ -60,24 +71,14 @@
       <aside class="d-none d-lg-block col-lg-2 sidebar">
         {%include 'sidemenu.html'%}
       </aside>
-      <aside class="col-12 col-lg-10 mainContent position-relative pb-5 mb-5 px-0" >
-       
-
-   
-         {% block mainContent%}
-        
-        
-         {% endblock mainContent%}
-        
-        
-      </main>
-       
+      <aside class="col-lg-10 mainContent position-relative pb-5 mb-5 px-0">
+        {% block mainContent%} {% endblock mainContent%}
       </aside>
-    
+    </main>
 
     <footer class="footer"></footer>
     <!-- ================================================================================================================================== -->
-    
+
     <!-- side menu for small screen  -->
     <div
       class="offcanvas offcanvas-start mt-5"
@@ -108,5 +109,38 @@
       src="https://kit.fontawesome.com/9476511420.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      //{%if 'Delete' in  title   or 'Remove' in title  %}
+      const inputs = document.getElementsByTagName("input");
+      const selects = document.getElementsByTagName("select");
+      for (var i = 0; i < inputs.length; i++) {
+        if (
+          inputs[i].type == "submit" ||
+          inputs[i].name == "csrfmiddlewaretoken"
+        ) {
+          inputs[i].classList += " btn btn-outline-danger px-5";
+        } else {
+          inputs[i].disabled = true;
+          inputs[i].classList += " bg-danger-subtle";
+        }
+      }
+      for (var i = 0; i < selects.length; i++) {
+        selects[i].disabled = true;
+        selects[i].classList += " bg-danger-subtle ";
+      }
+
+      document.getElementById("new-category").style.display = "none  ";
+
+      // {%endif%}
+    </script>
+    <!-- bootstrap tooltip -->
+    <script>
+      const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+      );
+      const tooltipList = [...tooltipTriggerList].map(
+        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+      );
+    </script>
   </body>
 </html>

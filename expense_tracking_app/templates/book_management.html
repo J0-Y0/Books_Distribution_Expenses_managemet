@@ -63,16 +63,13 @@
         </td>
 
         <td colspan="2">
-          <a             title="Edit"
-          href="{%url 'editBook' book.id %}">
+          <a title="Edit" href="{%url 'editBook' book.id %}">
             <i class="fa-solid fa-pencil px-3"></i>
-            
           </a>
         </td>
 
         <td>
-          <a             title="Delete"
-           href="{%url 'deleteBook' book.id %}">
+          <a title="Delete" href="{%url 'deleteBook' book.id %}">
             <i class="fa-solid fa-trash px-3"></i>
           </a>
         </td>
@@ -83,8 +80,6 @@
 </div>
 
 <!--Detail view modal-->
-
-<!-- Modal -->
 <div
   class="modal fade"
   id="exampleModal"
@@ -92,7 +87,9 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+  >
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Detail View</h5>
@@ -104,12 +101,9 @@
         ></button>
       </div>
       <div id="madal_body" class="modal-body">Unable to Display</div>
-     
-      </div>
     </div>
   </div>
 </div>
-
 
 <!-- paginator  -->
 <nav aria-label="Page  navigation  ">

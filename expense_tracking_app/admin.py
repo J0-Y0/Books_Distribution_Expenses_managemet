@@ -6,6 +6,10 @@ class booksAdmin(admin.ModelAdmin):
 class book_typeAdmin(admin.ModelAdmin):
      list_display =('type_name','modification_log')
 
+class profileAdmin(admin.ModelAdmin):
+     list_display  =('user','phone','avatar')
+
+admin.site.register(Profile,profileAdmin)
 admin.site.register(Books, booksAdmin)
 admin.site.register(Book_type,book_typeAdmin)
 

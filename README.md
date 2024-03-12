@@ -38,11 +38,18 @@ Books Distribution Expenses Tracker app build by Django python framework
 
 # next todo
 
+    1. User Groupe
+    2. Authentication
+    3. self password edit
+    4. user crud
+
+# task done
+
     1.Optimize CRUD templates context
     2.back button
         - delete : auto bach----doen
         - edit : auto back---done
     3.add : via cancel / add next
     4.pagination
-        <1 ..40 41 42 ...100>
-    3.icon and style for the CRUD
+        <1 ..40 41 42 ...100>-----done
+    3.icon and style for the CRUD----done
