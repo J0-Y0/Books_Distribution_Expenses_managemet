@@ -68,7 +68,6 @@ def book_management(request):
     return render(request,'book_management.html',{"books":books,"bookFilter":bookFilter,"page_offset":page_offset})
 @login_required(login_url='login')
 def add_book(request):
-    Books.objects.all().delete()
     form = Books_form()
     message = ""
     # add individually 
@@ -93,25 +92,40 @@ def add_book(request):
             wb = load_workbook(excel_file)
             ws = wb.active
 
+            nonImported_rows = []
         # try:
             for row in ws.iter_rows(min_row=2, values_only=True):
-                id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense = row
-                category =  "- - -" if category is None  else category
-                category_typ = Book_type.objects.filter(type_name__exact = category).first()
-                if category_typ is None:
+                try:
+                    id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense = row
+                    category =  "- - -" if category is None  else category
+                    category_typ = Book_type.objects.filter(type_name__exact = category).first()
+                    if category_typ is None:
+                        modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Imported"
+                        Book_type.objects.create(type_name = category,modification_log = modification_log)
                     modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Imported"
-                    Book_type.objects.create(type_name = category,modification_log = modification_log)
-                modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Imported"
-                Books.objects.create( idNumber =id,title =title	, subtitle =subtitle	,author =authors	, publisher =publisher,	published_date =published_date,	category=category_typ,	 distribution_expense =distribution_expense ,modification_log = modification_log)
+                    Books.objects.create( idNumber =id,title =title	, subtitle =subtitle	,author =authors	, publisher =publisher,	published_date =published_date,	category=category_typ,	 distribution_expense =distribution_expense ,modification_log = modification_log)
+                except ValueError as e :
+                    context = {
+                        "occurAt":"Importing File",
+                        "header":"Invalid data Format",
+                        "description":"Error in  Number of columns ," +e.args[0]+". Fix the issue on your file and try again "
+                    }
+
+                    return render(request, 'error.html',context)
+
+                except Exception as e: 
+                  #track rows that that cant be imported with their error 
+                   nonImported_row = [id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense,str(e)]
+                   nonImported_rows.append(nonImported_row)
+                   
+                
+            context = {"header":"Import Completed ",
+                        "message":"The below rows cant be imported due to the mentioned cases",
+                        'data':nonImported_rows
+                        }
             
-            context = {"header":"Successfully Imported",
-                        "message":"Imported Books:"}
             return render(request, 'success.html',context)
-        # except Exception as  e:
-                # context = {"header":"Unable to Import !!!",
-                #            "message":e}
-                # return render(request, 'success.html',context)
-      
+
     context = {
         "title":"Add Book",
         "header":"Add Book | Adding a Record ",
