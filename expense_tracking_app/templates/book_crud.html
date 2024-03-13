@@ -33,18 +33,23 @@
     <p class="card-text">
         <div class="row ">
           <div class=" d-none d-md-inline-flex  col-md-6 pt-4  justify-content-center ">
-            <div class="row ">
-              <div class="col-12 d-flex justify-content-center pb-0 mb-0">
-                <img   src="{% static 'addBook.png'%}"  alt="Logo" width="300" height="300">
-              </div>
-              <div class="col-12 text-center px-5 ">
+            
+              <div class="text-center px-5 pt-4">
+                
+                {%if title == "Add Book" %}
+                <i class="fa-solid fa-file-circle-plus  display-2 py-4"></i>
+                {%elif title == "Update Records" %}
+                <i class="fa-solid fa-file-pen display-2 py-4  text-warning"></i>   
+                {%elif title == "Delete Records"%}
+                <i class="fa-solid fa-file-circle-xmark display-2 py-4  text-danger"></i>   
+                {%endif%}
+                
                 <h3>{{header}}</h3>
                 <hr>
                 {{description}}
 
 
               </div>
-            </div>
     
 
     

@@ -17,13 +17,12 @@
 
     <b class="text-{{message.type}}"><i class="fa-solid {% if message.type == error  %} fa-triangle-exclamation {%else%} fa-regular fa-circle-check  {%endif%} px-2 "></i> {{message.msg}}</b>
   </div>
-  <div class="card-body py-0 px-"> 
+  <div class="card-body py-0 px-">  
     <p class="card-text">
         <div class="row ">
           <div class=" d-none d-md-inline-flex  col-md-6 pt-4  justify-content-center ">
-            <div class="row ">
               
-              <div class="col-12 text-center px-5 pt-4 ">
+              <div class="text-center px-5 pt-4 ">
 
                 {%if title == "Add User" %}
                 <i class="fa-solid fa-user-plus display-2 py-4"></i>
@@ -40,7 +39,6 @@
                 <hr>
                 {{description}}
 
-              </div>
             </div>
     
 
