@@ -8,7 +8,7 @@ Books Distribution Expenses Tracker app build by Django python framework
        -  [id ,title,subtitle, author, publisher . . .category ,modification_log ]
        -  id -> unique number
        - category field[type] related to category model field
-    2. category
+    2. Category
         - [type,added_by ]
     3.User
         - [username,email,password,user_groupe,invited_by]
@@ -38,9 +38,18 @@ Books Distribution Expenses Tracker app build by Django python framework
 
 # next todo
 
+    - user crud
+    - username change
+    - self password edit
+    - admin  as a staff user |as an option
+    - category - - - as un-categorized
+
+
+
+
+
     1. User Groupe
     2. Authentication
-    3. self password edit
     4. user crud
 
 # task done
