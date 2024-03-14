@@ -7,31 +7,60 @@
     <div class="card-header h3 text-success">
       <i class="fa-solid fa-user pe-2"></i> Profile
     </div>
-    <div class="card-body">
-        <img
-        style="width: 120px; height:120px"
-        class="rounded-circle account-img"
-        src="{{ request.user.profile.avatar.url }}"
-      />
-       <div class="row">
-        <div class="col-4 text-end">
-            <p class="card-text">First Name</p>
-            <p class="card-text">Last Name</p>
-            <p class="card-text">Email</p>
-            <p class="card-text">Phone Number</p>
-            <p class="card-text">Group Level</p>
-        </div>
-        <div class="col-4">
-            <p class="card-text">{{request.user.profile.first_name}}</p>
-            <p class="card-text">{{request.user.profile.last_name}}</p>
-            <p class="card-text">{{request.user.profile.email}}</p>
-            <p class="card-text">{{request.user.profile.phone}}</p>
-            <p class="card-text">{{request.user.profile.user_group}}</p>
+    <div class="card-body ">
+        
+       <div class="row px-5 ">
+        
+        <div class="col-md-4 col-12 me-5">
+          <div class=" d-flex justify-content-center">
+            <img
+          style="width: 120px; height:120px"
+          class="mb-3 me-5  rounded-circle account-img"
+          src="{{ request.user.profile.avatar.url }}"
+        />
+          </div>
+          <table class=" table table-success ">
+            <thead>
+                <tr>
+                    <td class="card-text text-end">First Name</td>
+                    <td class="card-text">{{request.user.profile.first_name}}</td>
+                </tr>
+                <tr>
+                    <td class="card-text text-end">Last Name</td>
+                    <td class="card-text">{{request.user.profile.last_name}}</td>
+                </tr>
+                <tr>
+                    <td class="card-text text-end">Email</td>
+                    <td class="card-text">{{request.user.profile.email}}</td>
+                </tr>
+                <tr>
+                    <td class="card-text text-end">Phone Number</td>
 
-        </div>
-        <div class="col-4">
-            <form action="" method="post">
+                    <td class="card-text">{{request.user.profile.phone}}</td>
+                </tr>
+                <tr>
+                    <td class="card-text text-end">Username</td>
 
+                    <td class="card-text">{{request.user}}</td>
+                    
+                </tr>
+                <tr>
+                  <td class="card-text text-end">Group Level</td>
+
+                  <td class="card-text">{{request.user.profile.user_group}}</td>
+                  
+              </tr>
+               
+            </thead>
+        </table>
+        </div>
+
+
+
+          <div class="col-md-6 col-12 justify-content-center  p-md-5 my-md-5" >
+            <p class="h3">Change Password</p><hr>
+            <form method="POST">
+              {% csrf_token %} 
           
             {% for field in password_form%} 
                   <span class="d-flex justify-content-between">
@@ -59,7 +88,7 @@
                   
                   <input   placeholder="{{field.label}}"  class=" form-control userfield " type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
                   {%endfor%}
-                  <a href="" class="btn btn-outline-success rounded-0 px-3 mt-3 form-control">Save</a>
+                  <input  type="submit" class="btn btn-outline-success rounded-0 px-3 mt-3 form-control"  value="Save">
 
                 </form>
         </div>

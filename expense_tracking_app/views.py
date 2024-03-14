@@ -2,6 +2,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Group,User,Permission
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login,logout
@@ -383,6 +385,16 @@ def define_group():
     
 @login_required(login_url='login')
 def my_profile(request):
-    password_form = PasswordChangeForm(request.user)
+    if request.method == "POST":
+        password_form = PasswordChangeForm(request.user, request.POST)
+        if password_form.is_valid():
+            user =password_form.save()
+            update_session_auth_hash(request, user)  # Important to update the session hash
+
+            return redirect('home')
+            
+    else:
+        password_form = PasswordChangeForm(request.user)
+   
 
     return render( request,'profile.html' ,{"password_form":password_form})
