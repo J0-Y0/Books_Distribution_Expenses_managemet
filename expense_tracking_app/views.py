@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Group,User,Permission
+from django.contrib.auth.forms import PasswordChangeForm
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import redirect, render
@@ -256,22 +258,20 @@ def add_user(request):
 def editUser(request,id):
     user = User.objects.get(id = id)
     message = "" 
-    
+    username =""
     if request.method == 'POST':
-        user_form = User_form(request.POST,instance=user)
         profile_form = Profile_form(request.POST,request.FILES,instance=user.profile)
         if profile_form.is_valid():
             if  'edit_toggle' in  request.POST:
                 togglevalue  = request.POST.get('edit_toggle')
                 if togglevalue == 'edited':
-                    username = user_form.cleaned_data['username']
-                    # if user.username != username:
-                    #         user.username =username
-                    # else:
-                    #     user_form.
+                    username = request.POST['username']
+                    # if user.username  == username:
+                    post_data = request.POST.copy()
+                    username = post_data.get('username', '')
+                    post_data['username'] = username + "xx"   
+                    user_form = User_form(request.POST,post_data)
                     if user_form.is_valid() :
-                        if user.username != username:
-                            user.username =username 
                         user.set_password( user_form.cleaned_data['password1'])
                         user.save()
                         user_profile = profile_form.save(commit=False)
@@ -287,9 +287,9 @@ def editUser(request,id):
         else:
             message = {'msg': "Unable to create user",'type':'danger'}
     else:
-        profile_form = Profile_form(request.POST, instance=user.profile)
+        profile_form = Profile_form( instance=user.profile)
 
-        user_form = User_form(request.POST,instance=user)
+        user_form = User_form( instance=user)
            
            
            
@@ -356,7 +356,6 @@ def user_logout(request):
     logout(request)
     return redirect('login')
     
-@login_required(login_url='login')
 def define_group():
     group_user,created =Group.objects.get_or_create(name = 'User') 
     group_admin,created =Group.objects.get_or_create(name = 'Admin') 
@@ -381,5 +380,9 @@ def define_group():
         if permission.codename == 'view_user':
             group_user.permissions.add(permission)
         group_admin.permissions.add(permission)
-        
-  
+    
+@login_required(login_url='login')
+def my_profile(request):
+    password_form = PasswordChangeForm(request.user)
+
+    return render( request,'profile.html' ,{"password_form":password_form})

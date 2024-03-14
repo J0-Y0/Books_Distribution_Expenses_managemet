@@ -2,7 +2,7 @@
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 
 
 class Books_form(forms.ModelForm):
@@ -40,14 +40,24 @@ class User_form(UserCreationForm):
             if password1 and password2 and password1 != password2:
                 raise forms.ValidationError("Passwords do not match")
             return password2
-        # def clean_username(self):
-        #     username = self.cleaned_data.get('username')
-        #     # Check if username has been changed
-        #     if self.instance.username == username:
-        #         # If changed, validate uniqueness
-        #         if User.objects.filter(username=username).exists():
-        #             raise forms.ValidationError("A user----- with that username already exists.")
-        #     return username
+        def clean_username(self):
+            username = self.cleaned_data.get('username')
+            # Check if username has been changed
+            if self.instance.username != username:
+                # If changed, validate uniqueness
+                if User.objects.filter(username=username).exists():
+                    raise forms.ValidationError("A user----- with that username already exists.")
+            return username
+class Username_update_Form(UserChangeForm):
+
+    class Meta:
+        model = User
+        fields = ['username']
+        widgets = {
+
+            'username' :forms.TextInput( attrs={'class': 'form-control', 'placeholder':'UserName'}),
+
+        }
 
 class Profile_form(forms.ModelForm):
     class Meta:

@@ -121,8 +121,8 @@
                       </span>
                   </span>
                
-
-                  <input {% if  title != "Add User"  %} disabled {%endif%}  placeholder="{{field.label}}"  {%if  field.name == 'username' %}  value="{{field.value}}" {%endif%} class=" form-control userfield" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
+                  
+                  <input {% if  title != "Add User"  %} disabled {%endif%}  placeholder="{{field.label}}"  {%if  field.name == 'username' %}  value="{{field.value}}" {%endif%} class=" form-control userfield {% if  title == 'Edit User'%}  {%endif%}" type="{{ field.field.widget.input_type }}" autocomplete="{{ field.field.widget.attrs.autocomplete }}"   required = '{{ field.field.required }}'  name="{{ field.name }}" id="{{field.id_for_label}} " >
                   {%endfor%}
 
                  
