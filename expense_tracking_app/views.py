@@ -101,7 +101,7 @@ def add_book(request):
             for row in ws.iter_rows(min_row=2, values_only=True):
                 try:
                     id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense = row
-                    category =  "- - -" if category is None  else category
+                    category =  "Un-Categorized" if category is None  else category
                     category_typ = Book_type.objects.filter(type_name__exact = category).first()
                     if category_typ is None:
                         modification_log = datetime.now().strftime("%Y-%m-%d %H:%M:%S") +" | "+str(request.user)+" | Imported"
@@ -391,7 +391,7 @@ def my_profile(request):
             user =password_form.save()
             update_session_auth_hash(request, user)  # Important to update the session hash
 
-            return redirect('home')
+            return redirect('logout')
             
     else:
         password_form = PasswordChangeForm(request.user)

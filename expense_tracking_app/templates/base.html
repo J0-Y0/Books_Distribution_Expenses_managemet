@@ -17,6 +17,23 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'base.css' %}" />
 
+    <!--fontawesomefree-->
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
     <title>Rumi {%block title %} {%endblock title%}</title>
   </head>
   <body>
@@ -107,10 +124,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- font-awesome CDN kit   -->
-    <script
-      src="https://kit.fontawesome.com/9476511420.js"
-      crossorigin="anonymous"
-    ></script>
+
     <script>
       //{%if 'Delete' in  title   or 'Remove' in title  %}
       const inputs = document.getElementsByTagName("input");

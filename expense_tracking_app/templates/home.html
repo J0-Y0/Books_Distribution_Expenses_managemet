@@ -24,10 +24,10 @@
           <div class="alert  alert-success mb-1" role="alert" style="min-width: 18rem; ">
             Summarized Analysis  <hr> <ul> 
              
-              <li>Books :{{total.books}}</li>
-              <li>Books category: {{total.category}}</li>
+              <li>Number of Books :{{total.books}}</li>
+              <li>Number of Category: {{total.category}}</li>
               <li>Total Expense: {{total.expense|floatformat:2}}</li>
-              <li>Average Expense {{total.average|floatformat:2}}</li>
+              <li>Average Expense : {{total.average|floatformat:2}}</li>
             </ul>
          
           </div>
@@ -35,11 +35,11 @@
 
             <div class=" card bg-success m-2 text-secondary text-light" style="min-width: 18rem; ">
               <div class="card-body">
-                <h5  class="card-title">{{category.name|title}}</h5>
+                <h5  class="card-title">{{forloop.counter}}.  {{category.name|title}}</h5>
                   <hr>
               
            <ul>   <li>Books: {{category.books}}</li>
-            <li>Expense: {{category.expense|floatformat:2}}</li>
+            <li>Total Expense: {{category.expense|floatformat:2}}</li>
             <li>Average Expense: {{category.average|floatformat:2}}</li></ul>
     
             </div>
@@ -69,7 +69,7 @@
             theme: "light2",
             animationEnabled: true,
             title:{
-                text: "Distribution Expense"
+                text: "Distribution Expense in percent "
             },
             data: [{
                 type: "pie",
