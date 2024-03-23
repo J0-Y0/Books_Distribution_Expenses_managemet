@@ -119,7 +119,7 @@ def add_book(request):
 
                 except Exception as e: 
                   #track rows that that cant be imported with their error 
-                   nonImported_row = [id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense,str(e)]
+                   nonImported_row = [id,title	,subtitle	,authors	,publisher,	published_date,	category,	distribution_expense,"Already exist :"+str(e)]
                    nonImported_rows.append(nonImported_row)
                    
                 
