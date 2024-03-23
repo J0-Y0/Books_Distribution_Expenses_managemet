@@ -47,11 +47,11 @@
         <td>{{book.publisher}}</td>
         <td>{{book.published_date}}</td>
         <td>{{book.category.type_name}}</td>
-        <td>{{book.distribution_expense}}</td>
+        <td>${{book.distribution_expense}}</td>
 
         <td colspan="2">
           <button
-            onclick="dynamicModal([ '{{book.idNumber}}', '{{book.title}}','{{book.subtitle}}','{{book.author}}','{{book.publisher}}','{{book.published_date}}','{{book.category.type_name}}','{{book.distribution_expense}}' ])"
+            onclick="dynamicModal([ '{{book.idNumber}}', '{{book.title}}','{{book.subtitle}}','{{book.author}}','{{book.publisher}}','{{book.published_date}}','{{book.category.type_name}}',' ${{book.distribution_expense}}' ])"
             type="button"
             title="Detail view"
             class="border-0"
@@ -152,7 +152,9 @@
     </li>
     <!--  last page  -->
     <li class="page-item">
-      <a href="?page={{  books.paginator.num_pages }}" class="page-link"
+      <a
+        href="?{{ request.GET.urlencode }}&page={{  books.paginator.num_pages }}"
+        class="page-link"
         >{{ books.paginator.num_pages }}</a
       >
     </li>

@@ -18,6 +18,24 @@
     <link rel="stylesheet" href="{% static 'base.css' %}" />
 
     <title>Rumi | Authentication {%block title %} {%endblock title%}</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'apple-touch-icon.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{%static 'favicon-32x32.png' %} "
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{%static 'favicon-16x16.png'  %}  "
+    />
+    <link rel="manifest" href="{%static  'site.webmanifest' %}  " />
   </head>
 
   <body class="loginPage">
@@ -26,10 +44,13 @@
         <u>. Portal for Rumi Press .</u>
       </p>
 
-      <div class="login row">
-        <i
-          class="fa-solid fa-shield-halved display-1 d-none d-md-block col-md-3 text-center"
-        ></i>
+      <div class="login row rounded rounded-bottom-5">
+        <img
+          src="{% static 'android-chrome-512x512.png' %}"
+          alt="text-logo"
+          class="display-1 d-none d-md-block col-md-3 text-center p-0"
+        />
+
         <form method="post" class="col-12 col-md-9">
           {% csrf_token %}
           <input

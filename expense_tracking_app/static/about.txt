@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Sofia
+- Font Author: Copyright (c) 2011 by LatinoType Limitada (info@latinotype.com), with Reserved Font Names "Sofia"
+- Font Source: https://fonts.gstatic.com/s/sofia/v14/8QIHdirahM3j_vu-sowsrqjk.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

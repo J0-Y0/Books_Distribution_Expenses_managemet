@@ -71,9 +71,6 @@ td {
   text-wrap: wrap;
 }
 .loginPage {
-  background-image: url("shelf.jpg");
-  background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   background-color: hsl(221, 31%, 53%);
   background-blend-mode: multiply;
