@@ -35,10 +35,24 @@
     />
 
     <title>Rumi {%block title %} {%endblock title%}</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'apple-touch-icon.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{%static 'favicon-32x32.png' %} "
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{%static 'favicon-16x16.png'  %}  "
+    />
+    <link rel="manifest" href="{%static  'site.webmanifest' %}  " />
   </head>
   <body>
     <header>
@@ -54,7 +68,15 @@
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-            Rumi Press
+            <a class="navbar-brand" href="{%url 'home'%}">
+              <img
+                src="{% static 'android-chrome-512x512.png' %}"
+                alt="text-logo"
+                width="30"
+                height="24"
+              />
+              Rumi Press
+            </a>
           </div>
 
           <div class="navbar-brand dropdown me-3">
