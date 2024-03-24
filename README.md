@@ -1,3 +1,23 @@
+## Next Todo
+ 1. Authoriztione( user group level)
+    - User
+          - view except users 
+          - CRUD Books
+   - Admin
+         all+CRUD User
+2. profile size compretion or limiting
+    - change the default image too,
+3. change the login layout
+4. make it responsive to mobile view  
+     
+     
+    
+
+
+
+
+
+
 # Books_Distribution_Expenses
 
 Books Distribution Expenses Tracker app build by Django python framework
