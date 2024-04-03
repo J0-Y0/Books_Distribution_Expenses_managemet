@@ -11,11 +11,13 @@ from django.shortcuts import redirect, render
 from openpyxl import load_workbook
 from django.db.models import Sum,Avg
 from datetime import datetime
+import random
 
 
 from .models import *
 from .form import *
 from .filter import BookFilter
+from .mailing import deliver_password_reset
 
 @login_required(login_url='login')
 def home(request):
@@ -358,7 +360,35 @@ def user_logout(request):
     logout(request)
     return redirect('login')
 def reset_password(request):
-    return render(request , "password_reset.html")
+    success_msg = ""
+    error = ""
+    if request.method  == "POST":
+        username = request.POST['username']
+        user = User.objects.filter(username = username).first()
+        if user:
+            passKey = generatePassword()
+            deliver_password_reset( subject = "Account Reset",
+                                    name = user.profile.first_name,
+                                    email = user.profile.email,
+                                    username = user.username,
+                                    password =passKey)
+            user.set_password(passKey) 
+            user.save()
+
+            success_msg  = "Well done! Your account has been reset, credentials will be delivered to your email shortly. "
+        else:
+            error  = "Username not found !"
+
+    return render(request , "password_reset.html", {"success_msg":success_msg,"error":error})
+def generatePassword():
+    passKey = ""
+    # password buffer
+    buffer = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$%&*"
+    # generate 6 digit (random password)
+    for i in range(6):
+        passKey += random.choice(buffer)
+    return passKey
+
 def define_group():
     group_user,created =Group.objects.get_or_create(name = 'User') 
     group_admin,created =Group.objects.get_or_create(name = 'Admin') 

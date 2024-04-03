@@ -1,0 +1,128 @@
+import os
+import smtplib
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+def sendmailto(email, html_content,subject):
+        message = MIMEMultipart("alternative")
+        message["Subject"] = f"{subject}"
+        message["From"] = os.environ['dev_email']
+
+        message["To"] = email
+        part = MIMEText(html_content, "html")
+        message.attach(part)
+        with smtplib.SMTP_SSL("smtp.gmail.com") as server:
+            server.login(os.environ['dev_email'] , os.environ['pass_key'])
+            server.sendmail(os.environ['dev_email'],
+                            email, message.as_string())
+            server.quit()
+def generatePassword(self, email,name,username):
+        passKey = ""
+        # password buffer
+        buffer = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$%&*"
+
+        # generate 6 digit (random password)
+        for i in range(6):
+            passKey += random.choice(buffer)
+
+        if isreset:
+            self.sendCode(
+             email=email, username=username, passKey=passKey,subject = "Password Reset",content="AS per your request your password has been reset")
+        else:
+            self.sendCode(
+             email=email, username=username, passKey=passKey,subject = "Access Granted",content="Now you get an access to POS monitoring tool")
+        return passKey
+
+def deliver_password_reset(subject,name,email,username,password):
+    html_content = f""" 
+                <!DOCTYPE html>
+                <html lang="en">
+                            <head>
+                            <meta charset="UTF-8">
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Document</title>
+                            </head>"""+f"""
+
+                        <body>
+                            <div class="content">
+                                <div>
+                                    <div class="content-header">
+                                        <h2 >{subject}</h2>
+                                    </div>
+                                    <div class="content-body">
+                                        <p>Dear {name}, <br> your account has been reset. Please use the below credentials to access your account and update your password.</p>
+                                            
+                                        <ul>
+                                            <li>Username: {username}</li>
+                                            <li>Password: {password}</li>
+                                        </ul>
+                                        </p>
+                                        <a title="Login" class="loginBtn" href="https://yosefe.pythonanywhere.com/login">Login</a>
+                                        <br><br>
+                            
+                                    <br>
+                                    
+                                    </div>
+                                    <hr>
+                                
+                                    <h5 class="footer-tag">From <i>Rumi Press's Book Distribution Expense Management Tool</i></h5>
+
+                                </p>
+                                    </div>
+                            
+
+                            </div>
+                        </body>"""+"""
+                        <style>
+            body {
+               font-family: 'Times New Roman', Times, serif;
+            }
+
+            .content {
+                
+                background-color: rgb(217, 216, 216);
+                margin: 4% 10%;
+                border-bottom: outset 6px rgb(255, 166, 0);
+                border-radius: 0 30px;
+                position: relative;
+                
+            }
+
+            .content-header{
+            color: rgb(1, 101, 189);
+            background-color: rgb(255, 166, 0);
+            padding:1px  20px; 
+            border-bottom:inset 5px rgb(7, 111, 163); 
+            border-top-right-radius: 30px;
+
+            
+            }
+            .content-body{
+                padding: 5%;
+
+            }
+            .footer-tag {
+                position: absolute;
+                padding-left: 10px;
+                bottom: 0%;
+                width: 90%;
+                text-align: center;
+                font-style: italic;
+                color: rgb(70, 80, 80);
+            }
+
+            .loginBtn {
+                text-decoration: unset;
+                background-color: rgb(0, 136, 215);
+                color: rgb(255, 255, 255);
+                font-size: larger;
+                margin: 5%;
+                padding: 0.5% 3% ;
+
+            }
+        </style>
+                </html>        
+                """
+    sendmailto(email, html_content,subject)
