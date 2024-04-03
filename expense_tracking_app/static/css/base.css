@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: serif;
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+}
+
+nav .dropdown-menu {
+  border-radius: 0;
+  width: 40vw;
+}
+.sidebar {
+  height: 100vh;
+  background-color: #1a1f37;
+  color: #dedede;
+  padding: 3% 1% 3% 3%;
+}
+.offcanvas {
+  background-color: #1a1f37;
+  margin-top: 65px !important;
+  color: #dedede;
+  max-width: 200px;
+}
+a {
+  text-decoration: unset;
+  color: inherit;
+}
+
+.sidemenu a {
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  border-bottom: #6a6a6d solid 1px;
+
+  display: block;
+  /* width: 100%; */
+}
+
+.sidemenu a:hover {
+  border-bottom: #000dff solid 1px;
+}
+
+.mainContent {
+  height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.mainContent_mainView {
+  height: 78vh;
+  overflow-y: scroll;
+}
+thead th {
+  background-color: #c2c0d1 !important;
+}
+.canvasjs-chart-credit {
+  display: none !important;
+}
+
+tr:hover td {
+  background-color: #d4d4fa !important;
+}
+/* limit bulk row data view */
+td {
+  max-width: 10vw;
+  text-wrap: nowrap;
+  overflow-x: hidden;
+}
+.modal-table td {
+  max-width: fit-content;
+  text-wrap: wrap;
+}
+.loginPage {
+  background-repeat: no-repeat;
+  background-color: hsl(221, 31%, 53%);
+  background-blend-mode: multiply;
+  /* height: 100vh; */
+}
+.login {
+  margin-top: 8%;
+  border-radius: 0;
+  background: #4e618c;
+  box-shadow: 30px 30px 61px #415174, -30px -30px 61px #5b71a4;
+  border-bottom: #ffffff solid 2px;
+}
+.login form {
+  padding: 4%;
+}
+.login i {
+  background-color: #537ab5a3;
+  color: rgb(255, 255, 255);
+  padding-top: 25px;
+  font-size: 7vw;
+}
+
+.mainContent {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.jo {
+  scroll-margin-top: 50px; /* Adjust the scroll margin as needed */
+}
+.category-card {
+  background-color: #1d353e;
+  color: #9bb4ec;
+  transition: border-radius 0.9s ease, border-left 0.9s ease; /* Apply transitions to both properties */
+}
+.category-card:hover {
+  border-left: 4px solid rgb(103, 235, 125);
+  border-radius: 0 30px 0 30px;
+}
+
+.category-card:hover .category-title {
+  color: rgb(103, 235, 125);
+}
+.category-card:hover hr {
+  color: rgb(68, 255, 0);
+}
+/* .category-title */

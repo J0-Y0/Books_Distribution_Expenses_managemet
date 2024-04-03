@@ -13,11 +13,7 @@
     <div class="card-body ">
       
          <div class="row">
-         <!-- <div class="col-3 ">
-          
-          
-        
-         </div> -->
+      
 
           <div class=" justify-content-center"  style="  display: flex;
           flex-wrap: wrap;" >
@@ -33,9 +29,9 @@
           </div>
             {%for category in catagories%} 
 
-            <div class=" card bg-success m-2 text-secondary text-light" style="min-width: 18rem; ">
-              <div class="card-body">
-                <h5  class="card-title">{{forloop.counter}}.  {{category.name|title}}</h5>
+            <div class=" card bg-success-subtle  border-0   m-2" style="min-width: 18rem; ">
+              <div class="card-body category-card">
+                <h5   class="category-title cat card-title">{{forloop.counter}}.  {{category.name|title}}</h5>
                   <hr>
               
            <ul>   <li>Books: {{category.books}}</li>
@@ -61,7 +57,7 @@
     </div>
   </div>
 
-  <script src="{% static 'canvasjs.min.js' %}"></script>
+  <script src="{% static 'js/canvasjs.min.js' %}"></script>
 
   <script>
     window.onload = function () {

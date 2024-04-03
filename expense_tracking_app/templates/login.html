@@ -14,68 +14,89 @@
       crossorigin="anonymous"
     />
 
-    <!-- custom css -->
-    <link rel="stylesheet" href="{% static 'base.css' %}" />
-
     <title>Rumi | Authentication {%block title %} {%endblock title%}</title>
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="{% static 'apple-touch-icon.png' %}"
+      href="{% static 'img/apple-touch-icon.png' %}"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="{%static 'favicon-32x32.png' %} "
+      href="{%static 'img/favicon-32x32.png' %} "
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="{%static 'favicon-16x16.png'  %}  "
+      href="{%static 'img/favicon-16x16.png'  %}  "
     />
-    <link rel="manifest" href="{%static  'site.webmanifest' %}  " />
+    <link rel="manifest" href="{%static  'img/site.webmanifest' %}  " />
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
   </head>
 
-  <body class="loginPage">
+  <body>
     <div class="d-grid justify-content-center">
-      <p class="display-3 text-light mt-3 text-center">
-        <u>. Portal for Rumi Press .</u>
-      </p>
+      <p class="display-3 mt-5 text-center">Rumi Press | Login</p>
 
-      <div class="login row rounded rounded-bottom-5">
+      <div class="login">
         <img
-          src="{% static 'android-chrome-512x512.png' %}"
+          src="{% static 'img/android-chrome-512x512.png' %}"
           alt="text-logo"
           class="display-1 d-none d-md-block col-md-3 text-center p-0"
         />
 
-        <form method="post" class="col-12 col-md-9">
+        <form method="POST" class="col-12 col-md-9 p-md-3">
           {% csrf_token %}
-          <input
-            class="rounded-0 form-control m-1"
-            type="text"
-            placeholder="username"
-            name="username"
-          />
-          <input
-            class="rounded-0 form-control m-1"
-            type="password"
-            placeholder="Password"
-            name="password"
-          />
 
-          <input
-            class="rounded-0 btn btn-primary form-control m-1"
-            type="submit"
-            value="Login"
-          />
+          <div class="input-group mb-1">
+            <span class="input-group-text" id="basic-addon">@</span>
+            <input
+              required
+              type="text"
+              class="form-control"
+              placeholder="Username"
+              name="username"
+              aria-describedby="basic-addon"
+            />
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"
+              ><i class="fa-solid fa-lock"></i
+            ></span>
+
+            <input
+              required
+              type="password"
+              class="form-control"
+              placeholder="password"
+              aria-label="password"
+              name="password"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+
+          <div class="btn-group w-100 ms-1 mt-2">
+            <input
+              class="rounded-0 btn btn-primary form-control"
+              type="submit"
+              value="Login"
+            />
+            <a href="#" class="rounded-0 btn btn-secondary form-control"
+              >Forget
+            </a>
+          </div>
           <p class="ms-1 mt-2 p-1 text-danger alert alert-danger alert-sm">
             {{error}}
           </p>
         </form>
       </div>
+      <footer class="text-center text-bg-secondary">
+        <i><i class="fa-regular fa-copyright"></i> Rumi Press April, 2024</i>
+      </footer>
     </div>
 
     <script
@@ -84,9 +105,16 @@
       crossorigin="anonymous"
     ></script>
     <!-- font-awesome CDN kit   -->
-    <script
-      src="https://kit.fontawesome.com/9476511420.js"
-      crossorigin="anonymous"
-    ></script>
+    <!--fontawesomefree-->
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
   </body>
 </html>
