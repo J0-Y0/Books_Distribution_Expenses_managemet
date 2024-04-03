@@ -109,7 +109,7 @@ td {
 .category-card {
   background-color: #1d353e;
   color: #9bb4ec;
-  transition: border-radius 0.9s ease, border-left 0.9s ease; /* Apply transitions to both properties */
+  transition: border-radius 0.9s ease; /* Apply transitions to both properties */
 }
 .category-card:hover {
   border-left: 4px solid rgb(103, 235, 125);
