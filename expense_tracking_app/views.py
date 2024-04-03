@@ -357,7 +357,8 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
-    
+def reset_password(request):
+    return render(request , "password_reset.html")
 def define_group():
     group_user,created =Group.objects.get_or_create(name = 'User') 
     group_admin,created =Group.objects.get_or_create(name = 'Admin') 
