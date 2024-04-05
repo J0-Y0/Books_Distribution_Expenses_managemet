@@ -38,91 +38,35 @@ def deliver_password_reset(subject,name,email,username,password):
     html_content = f""" 
                 <!DOCTYPE html>
                 <html lang="en">
-                            <head>
-                            <meta charset="UTF-8">
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Document</title>
-                            </head>"""+f"""
-
-                        <body>
-                            <div class="content">
-                                <div>
-                                    <div class="content-header">
+                <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+                </head>
+                
+                <body style="font-family: 'Times New Roman', Times, serif;">
+                <table cellpadding="0" cellspacing="0" border="0" align="center" style="background-color: rgb(217, 216, 216); margin: 4% 10%; border-bottom: outset 6px rgb(255, 166, 0); border-radius: 0 30px;">
+                    <tr>
+                        <td>
+                            <div style="color: rgb(1, 101, 189); background-color: rgb(255, 166, 0); padding: 1px 20px; border-bottom: inset 5px rgb(7, 111, 163); border-top-right-radius: 30px;">
                                         <h2 >{subject}</h2>
-                                    </div>
-                                    <div class="content-body">
+                            </div>
+                            <div style="padding: 5%;">
                                         <p>Dear {name}, <br> your account has been reset. Please use the below credentials to access your account and update your password.</p>
-                                            
-                                        <ul>
+                               <ul>
                                             <li>Username: {username}</li>
                                             <li>Password: {password}</li>
                                         </ul>
-                                        </p>
-                                        <a title="Login" class="loginBtn" href="https://yosefe.pythonanywhere.com/login">Login</a>
-                                        <br><br>
-                            
-                                    <br>
-                                    
-                                    </div>
-                                    <hr>
-                                
-                                    <h5 class="footer-tag">From <i>Rumi Press's Book Distribution Expense Management Tool</i></h5>
-
-                                </p>
-                                    </div>
-                            
-
+                                <a title="Login" href="https://yosefe.pythonanywhere.com/login" style="text-decoration: none; background-color: rgb(0, 136, 215); color: rgb(255, 255, 255); font-size: larger; margin: 5%; padding: 0.5% 3%;">Login</a>
                             </div>
-                        </body>"""+"""
-                        <style>
-            body {
-               font-family: 'Times New Roman', Times, serif;
-            }
+                            <hr>
+                            <h5 style="padding-left: 10px; width: 90%; text-align: center; font-style: italic; color: rgb(70, 80, 80);">From <i>Rumi Press's Book Distribution Expense Management Tool</i></h5>
+                        </td>
+                    </tr>
+                </table>
+                </body>
+                </html>
 
-            .content {
-                
-                background-color: rgb(217, 216, 216);
-                margin: 4% 10%;
-                border-bottom: outset 6px rgb(255, 166, 0);
-                border-radius: 0 30px;
-                position: relative;
-                
-            }
-
-            .content-header{
-            color: rgb(1, 101, 189);
-            background-color: rgb(255, 166, 0);
-            padding:1px  20px; 
-            border-bottom:inset 5px rgb(7, 111, 163); 
-            border-top-right-radius: 30px;
-
-            
-            }
-            .content-body{
-                padding: 5%;
-
-            }
-            .footer-tag {
-                position: absolute;
-                padding-left: 10px;
-                bottom: 0%;
-                width: 90%;
-                text-align: center;
-                font-style: italic;
-                color: rgb(70, 80, 80);
-            }
-
-            .loginBtn {
-                text-decoration: unset;
-                background-color: rgb(0, 136, 215);
-                color: rgb(255, 255, 255);
-                font-size: larger;
-                margin: 5%;
-                padding: 0.5% 3% ;
-
-            }
-        </style>
-                </html>        
                 """
     sendmailto(email, html_content,subject)
