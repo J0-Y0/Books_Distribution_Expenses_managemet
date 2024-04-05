@@ -55,7 +55,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+      <nav class="w-100 navbar navbar-expand-xlg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
           <div class="navbar-brand">
             <button
@@ -111,11 +111,13 @@
       </nav>
     </header>
 
-    <main class="row">
+    <main class="row me-0">
       <aside class="d-none d-lg-block col-lg-2 sidebar">
         {%include 'sidemenu.html'%}
       </aside>
-      <aside class="col-lg-10 mainContent position-relative pb-5 mb-5 px-0">
+      <aside
+        class="col-lg-10 bg-success-subtle mainContent position-relative pb-5 mb-5 px-0"
+      >
         {% block mainContent%} {% endblock mainContent%}
       </aside>
     </main>
