@@ -145,7 +145,7 @@ def add_book(request):
     }
     return render(request,'book_crud.html',context)
 @login_required(login_url='login')
-@permission_required("expense_tracking_app.update_books")
+@permission_required("expense_tracking_app.change_books")
 def editBook(request,id):
     book = Books.objects.get(pk = id)
     message = ""
@@ -263,7 +263,7 @@ def add_user(request):
             
     return render(request,'user_crud.html',context)
 @login_required(login_url='login')
-@permission_required("auth.edit_user")
+@permission_required("auth.change_user")
 def editUser(request,id):
     user = User.objects.get(id = id)
     message = "" 
