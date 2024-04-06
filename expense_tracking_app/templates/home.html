@@ -5,90 +5,95 @@
 <hr />
 {% block mainContent%}
 
-<div id="chartContainer" style="width: 100%; height: 360px " class="my-4"></div>
-<div >
-
-  <div class=" jo card bg-success-subtle position-sticky bottom-0">
-    <div class="card-header"><b>Expense</b></div>
-    <div class="card-body ">
-      
-         <div class="row">
-      
-
-          <div class=" justify-content-center"  style="  display: flex;
-          flex-wrap: wrap;" >
-          <div class="alert  alert-success mb-1" role="alert" style="min-width: 18rem; ">
-            Summarized Analysis  <hr> <ul> 
-             
-              <li>Number of Books :{{total.books}}</li>
-              <li>Number of Category: {{total.category}}</li>
-              <li>Total Expense:  ${{total.expense|floatformat:2}}</li>
-              <li>Average Expense : ${{total.average|floatformat:2}}</li>
-            </ul>
-         
-          </div>
-            {%for category in catagories%} 
-
-            <div class=" card bg-success-subtle  border-0   m-2" style="min-width: 18rem; ">
-              <div class="card-body category-card">
-                <h5   class="category-title cat card-title">{{forloop.counter}}.  {{category.name|title}}</h5>
-                  <hr>
-              
-           <ul>   <li>Books: {{category.books}}</li>
-            <li>Total Expense: ${{category.expense|floatformat:2}}</li>
-            <li>Average Expense: ${{category.average|floatformat:2}}</li></ul>
-    
+<div class="mainContent">
+  <div
+    id="chartContainer"
+    style="width: 100%; height: 360px"
+    class="my-4 mt-0"
+  ></div>
+  <div>
+    <div class="jo card bg-success-subtle position-sticky bottom-0">
+      <div class="card-header"><b>Expense</b></div>
+      <div class="card-body">
+        <div class="row">
+          <div
+            class="justify-content-center"
+            style="display: flex; flex-wrap: wrap"
+          >
+            <div
+              class="alert alert-success mb-1"
+              role="alert"
+              style="min-width: 18rem"
+            >
+              Summarized Analysis
+              <hr />
+              <ul>
+                <li>Number of Books :{{total.books}}</li>
+                <li>Number of Category: {{total.category}}</li>
+                <li>Total Expense: ${{total.expense|floatformat:2}}</li>
+                <li>Average Expense : ${{total.average|floatformat:2}}</li>
+              </ul>
             </div>
+            {%for category in catagories%}
+
+            <div
+              class="card bg-success-subtle border-0 m-2"
+              style="min-width: 18rem"
+            >
+              <div class="card-body category-card">
+                <h5 class="category-title cat card-title">
+                  {{forloop.counter}}. {{category.name|title}}
+                </h5>
+                <hr />
+
+                <ul>
+                  <li>Books: {{category.books}}</li>
+                  <li>Total Expense: ${{category.expense|floatformat:2}}</li>
+                  <li>Average Expense: ${{category.average|floatformat:2}}</li>
+                </ul>
+              </div>
+            </div>
+
+            {%endfor%}
           </div>
-    
-    
-    
-        {%endfor%}
-
-          </div>
-
-         </div>
-          
-</div>
-
-
-
-
+        </div>
+      </div>
     </div>
   </div>
-
-  <script src="{% static 'js/canvasjs.min.js' %}"></script>
-
-  <script>
-    window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer", {
-            theme: "light2",
-            animationEnabled: true,
-            title:{
-                text: "Distribution Expense in percent "
-            },
-            data: [{
-                type: "pie",
-                startAngle: -90,
-                yValueFormatString: "#,###'%'",
-                dataPoints: {{ datapoints | safe }}
-            }]
-        });
-        chart.render();
-    }
-
-
-  const parentContainer = document.querySelector('.mainContent');
-const childElement = document.querySelector('.jo');
-
-childElement.addEventListener('mouseenter', () => {
-  parentContainer.scrollTop = 300; // Move scroll bar to bottom
-});
-
-childElement.addEventListener('mouseleave', () => {
-  parentContainer.scrollTop = 0; // Move scroll bar to top (original position)
-});
-  </script>
 </div>
 
+<script src="{% static 'js/canvasjs.min.js' %}"></script>
+
+<script>
+      window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer", {
+
+
+            animationEnabled: true,
+              title:{
+                  text: "Distribution Expense in percent "
+              },
+              backgroundColor:"transparent",
+              data: [{
+                  type: "pie",
+                  startAngle: -90,
+                  yValueFormatString: "#,###'%'",
+                  dataPoints: {{ datapoints | safe }}
+              }]
+          });
+          chart.render();
+      }
+
+
+    const parentContainer = document.querySelector('.mainContent');
+  const childElement = document.querySelector('.jo');
+
+  childElement.addEventListener('mouseenter', () => {
+    parentContainer.scrollTop = 300; // Move scroll bar to bottom
+  });
+
+  childElement.addEventListener('mouseleave', () => {
+    parentContainer.scrollTop = 0; // Move scroll bar to top (original position)
+  });
+</script>
 {% endblock mainContent%}

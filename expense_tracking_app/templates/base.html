@@ -57,9 +57,9 @@
     <header>
       <nav class="w-100 navbar navbar-expand-xlg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <div class="navbar-brand">
+          <div class="navbar-brand d-block">
             <button
-              class="navbar-toggler"
+              class="navbar-toggler d-md-none"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"
@@ -112,17 +112,19 @@
     </header>
 
     <main class="row me-0">
-      <aside class="d-none d-lg-block col-lg-2 sidebar">
+      <aside class="d-none d-md-block col-md-3 col-xl-2 sidebar">
         {%include 'sidemenu.html'%}
       </aside>
       <aside
-        class="col-lg-10 bg-success-subtle mainContent position-relative pb-5 mb-5 px-0"
+        class="col-md-9 col-xl-10 bg-success-subtle position-relative px-0"
       >
         {% block mainContent%} {% endblock mainContent%}
       </aside>
+      <footer class="text-center">
+        <i><i class="fa-regular fa-copyright"></i> Rumi Press April, 2024</i>
+      </footer>
     </main>
 
-    <footer class="footer"></footer>
     <!-- ================================================================================================================================== -->
 
     <!-- side menu for small screen  -->

@@ -4,7 +4,8 @@
 {% block title%} | {{title}} {% endblock title%}
 <hr />
 {% block mainContent%}
-
+<div class="mainContent">
+  
 <nav style="--bs-breadcrumb-divider: ' |';" aria-label="breadcrumb">
   <ol class="breadcrumb p-2 bg-primary-subtle "> 
     <li class="breadcrumb-item text-primary"><a href="{%url 'users' %}">User Management  </a></li>
@@ -153,5 +154,6 @@ function toggle(){
 }
 </script>
 
+</div>
 
 {% endblock mainContent%}

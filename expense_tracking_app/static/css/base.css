@@ -7,7 +7,6 @@ body {
   font-family: serif;
   width: 100vw;
   height: 100vh;
-
   overflow: hidden;
 }
 
@@ -46,13 +45,15 @@ a {
 }
 
 .mainContent {
-  height: 90vh;
-  overflow-y: scroll;
+  height: 85vh;
+  overflow-y: auto;
   position: relative;
+  scroll-behavior: smooth;
+  padding-bottom: 30px;
 }
 
 .mainContent_mainView {
-  height: 78vh;
+  height: 70%;
   overflow-y: scroll;
 }
 thead th {
@@ -98,11 +99,6 @@ td {
   font-size: 7vw;
 }
 
-.mainContent {
-  overflow-y: auto; /* Enable vertical scrolling */
-  scroll-behavior: smooth; /* Enable smooth scrolling */
-}
-
 .jo {
   scroll-margin-top: 50px; /* Adjust the scroll margin as needed */
 }
@@ -123,3 +119,26 @@ td {
   color: rgb(68, 255, 0);
 }
 /* .category-title */
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 2px;
+  padding-top: 5px;
+  margin-left: 0;
+  z-index: 0 !important;
+  background-color: #181e3e;
+  color: #4e618c;
+}
+
+@media screen and (min-width: 768px) {
+  /* Your CSS rules for screens smaller than the Bootstrap medium size (MD) */
+  footer {
+    width: 76.1% !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  footer {
+    width: 84% !important;
+  }
+}
