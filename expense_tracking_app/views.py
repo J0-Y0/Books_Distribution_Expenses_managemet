@@ -1,11 +1,11 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Group,User,Permission
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required,login_required
 from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import redirect, render
 from openpyxl import load_workbook
@@ -73,6 +73,7 @@ def book_management(request):
     
     return render(request,'book_management.html',{"books":books,"bookFilter":bookFilter,"page_offset":page_offset})
 @login_required(login_url='login')
+@permission_required("expense_tracking_app.add_books")
 def add_book(request):
     form = Books_form()
     message = ""
@@ -144,6 +145,7 @@ def add_book(request):
     }
     return render(request,'book_crud.html',context)
 @login_required(login_url='login')
+@permission_required("expense_tracking_app.update_books")
 def editBook(request,id):
     book = Books.objects.get(pk = id)
     message = ""
@@ -173,6 +175,7 @@ def editBook(request,id):
     }
     return render(request,'book_crud.html',context)
 @login_required(login_url='login')
+@permission_required("expense_tracking_app.delete_books")
 def deleteBook(request,id):
     book = Books.objects.get(pk = id)
     form = Books_form(instance=book)
@@ -214,10 +217,11 @@ def add_category(request):
 # user
 @login_required( login_url='/login')
 def user_managment(request):
-    users = User.objects.all()
+    users = User.objects.exclude(profile__isnull = True)
 
     return render(request,'user_managment.html',{'users':users })
 @login_required(login_url='login')
+@permission_required("auth.add_user")
 def add_user(request): 
     message = ""     
     
@@ -259,6 +263,7 @@ def add_user(request):
             
     return render(request,'user_crud.html',context)
 @login_required(login_url='login')
+@permission_required("auth.edit_user")
 def editUser(request,id):
     user = User.objects.get(id = id)
     message = "" 
@@ -309,6 +314,7 @@ def editUser(request,id):
     }
     return render(request,'user_crud.html',context)   
 @login_required(login_url='login')
+@permission_required("auth.delete_user")
 def deleteUser(request,id):
     message = "" 
     user = User.objects.get(id = id)
