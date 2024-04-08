@@ -1,7 +1,7 @@
 
 # Expense Tracker | Rumi press 
 
-Welcome to the Rumi Expense Tracker project. This project was executed with the objective of automating the business processes at Rumi Press, one of the largest book distribution houses in the EdTech industry. Previously, the team at Rumi Press had been utilizing spreadsheets to track their book distribution process. Recognizing the need for a more efficient and secure system, we implemented a Django based web-application tailored to their needs.
+Welcome to the Rumi Expense Tracker project. This project was executed with the objective of automating the business processes at Rumi Press, one of the largest book distribution houses in the EdTech industry. Previously, the team at Rumi Press had been utilizing spreadsheets to track their book distribution process. Recognizing the need for a more efficient and secure system, I have implemented a Django based web-application tailored to their needs.
 
 The project had several objectives, including tracking book distribution expenses, increasing data security and availability, and customizing and automating business processes. To accomplish these objectives, the following tasks were executed:
 
