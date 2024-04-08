@@ -1,84 +1,80 @@
-## Next Todo
- 1. Authoriztione( user group level)
-    - User
-          - view except users 
-          - CRUD Books
-    - Admin
-         all+CRUD User
-2. profile size compretion or limiting
-    - change the default image too,
-3. change the login layout
-4. make it responsive to mobile view  
-     
-     
-    
+
+# Expense Tracker | Rumi press 
+
+Welcome to the Rumi Expense Tracker project. This project was executed with the objective of automating the business processes at Rumi Press, one of the largest book distribution houses in the EdTech industry. Previously, the team at Rumi Press had been utilizing spreadsheets to track their book distribution process. Recognizing the need for a more efficient and secure system, we implemented a Django based web-application tailored to their needs.
+
+The project had several objectives, including tracking book distribution expenses, increasing data security and availability, and customizing and automating business processes. To accomplish these objectives, the following tasks were executed:
+
+- Development of a CRUD* view to manage book categories such as Business Analytics, Python, Data Science, and Math.
+- Development of a CRUD* view to add book information such as the title, author, publishing date, book category, and distribution expenses.
+- Importation of existing data from spreadsheets to the web app.
+- Development of a report view that enables the team to view the distribution expenses of books according to their categories.
+- CRUD: Create, Read, Update, Delete
+
+This project is a testament to the application of efficient web development practices to create practical solutions for businesses. The details of the project, including the technology used, features, access management, and user interface, are documented in the following sections.
+
+
+## Technology Stack
+
+* **Frontend:**
+    * HTML
+    * CSS
+    * JavaScript (JS)
+    * Bootstrap 5 (for responsive design and UI components)
+    * Font Awesome icons (for visual appeal and interactivity)
+    * Chart.js (for data visualization)
+* **Backend:**
+    * Python
+    * Django (high-level web framework for efficient development)
+
+## Key Features
+
+* **Dashboard:**
+
+    * Provides a centralized view of key metrics and insights.
+    * Includes charts for expense visualization, expense summary, and average expense.
+    * Displays a list of book categories with corresponding numbers of books, total, and average expenses.
+* **Book Management:**
+    * **View Book List:** Manage extensive book databases efficiently with pagination.
+    * **Filter Books:** Narrow down book searches by ID, Author, Publisher, or other relevant criteria.
+    * **CRUD Operations:**
+        * **Create/Add Books:** Manually add new books or import data from existing Excel files.
+        * **Edit Books:** Update book information as needed.
+        * **Delete Books:** Remove books from the system while maintaining data integrity.
+    * **Book Categories:** Create and manage custom book categories for better organization.
+
+* **User Management:**
+
+    * **View User List:** Administer user accounts effectively with a comprehensive user list.
+    * **CRUD Users:**
+        * Create new user accounts with appropriate permissions.
+        * Edit user details for profile management.
+        * Delete user accounts when necessary.
+    * **Modal for Admins:** Dedicated user management interface for administrators.
+
+## Access Management
+* **Authentication**
+   * **Single-Factor Authentication(SFA):** Secure login using username and password combinations.
+   * **Account Reset:** Enables users to reset forgotten passwords. Reset credentials are delivered via email for secure recovery.
+* **Authorization**
+    * **User Groups:** Defines user roles and permissions.
+    * **User Group: User:** Read-only access to all data models (cannot modify data).
+    * **User Group: Admin:** Full CRUD privileges on all data models (can create, read, update, and delete data).
+
+## User Interface (UI)
+
+* **Modern Design:** Utilizes Bootstrap 5 for a clean, responsive, and mobile-friendly UI that adapts to different screen sizes.
+* **Interactive Icons:** Font Awesome icons enhance user experience with intuitive visual cues.
 
 
 
 
 
 
-# Books_Distribution_Expenses
+---
 
-Books Distribution Expenses Tracker app build by Django python framework
-
-# Data model
-
-    1. Books
-       -  [id ,title,subtitle, author, publisher . . .category ,modification_log ]
-       -  id -> unique number
-       - category field[type] related to category model field
-    2. Category
-        - [type,added_by ]
-    3.User
-        - [username,email,password,user_groupe,invited_by]
-        - invited_by field
-            record who add this user to the system
-
-# User Groupe
-
-        a. User
-            - can  CRUD (create, read, update delete) for Books
-        b. Admin
-            - can do every thing what a user can do plus
-            - can  CRUD (create, read, update delete) for Users i.e user management
-            - can access django administration
-
-# who can access to the system
-
-    For security purpose user can not create their account ,they only invited by the the system admin.
-    and then when they first time to  login they forward to password change form
-
-# modification log
-
-    -date
-    -user
-    -action
-    -description
-
-# next todo
-
-    - user crud
-    - username change
-    - self password edit
-    - admin  as a staff user |as an option
-    - category - - - as un-categorized
+This project exemplifies the power of effective web development practices in creating practical solutions for real-world business challenges. It demonstrates how well-chosen technologies and well-defined processes can lead to increased efficiency, improved data management, and ultimately, a competitive advantage.
 
 
+**Note:** This project was completed as part of a Coursera project.
 
-
-
-    1. User Groupe
-    2. Authentication
-    4. user crud
-
-# task done
-
-    1.Optimize CRUD templates context
-    2.back button
-        - delete : auto bach----doen
-        - edit : auto back---done
-    3.add : via cancel / add next
-    4.pagination
-        <1 ..40 41 42 ...100>-----done
-    3.icon and style for the CRUD----done
